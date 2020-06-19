@@ -1,0 +1,4047 @@
+<!DOCTYPE html>
+<html id="XenForo" lang="vi-VN" dir="LTR" class="Public NoJs LoggedOut NoSidebar RunDeferred Responsive" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<link rel="Shortcut Icon" href="image/css/favicon.ico" type="image/x-icon" />
+
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    
+        <base href="https://whitehat.vn/" />
+        <script>
+            var _b = document.getElementsByTagName('base')[0], _bH = "https://whitehat.vn/";
+            if (_b && _b.href != _bH) _b.href = _bH;
+            var listForumLastPostUserId = new Array();
+        </script>
+        
+    
+
+    <title>[Kết quả] [KT01] Các công cụ khai thác lỗ hổng SQL Injection trên ứng dụng Web | WhiteHat.vn</title>
+    
+    <noscript><style>.JsOnly, .jsOnly { display: none !important; }</style></noscript>
+    <link rel="stylesheet" href="css.php?css=xenforo,form,public&amp;style=1&amp;dir=LTR&amp;d=1586501939" />
+    <link rel="stylesheet" href="css.php?css=EWRporta2_Global,bb_code,facebook,login_bar,message,message_user_info,mobile,public,thread_view&amp;style=1&amp;dir=LTR&amp;d=1586501939" />
+  
+    
+
+    <script>
+
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	ga('create', 'UA-144345582-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+    	<script src="js/jquery/jquery-1.11.0.min.js"></script>	
+		
+	<script src="js/xenforo/xenforo.js?_v=0ae37960"></script>
+
+    
+    <link rel="apple-touch-icon" href="https://whitehat.vn/image/css/wh-logo.png" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed For WhiteHat.vn" href="forums/-/index.rss" />
+    
+    
+	<link rel="canonical" href="https://whitehat.vn/threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/" />
+	<meta name="description" content="[IMG]
+ 
+
+
+Giải thưởng:Giải nhất: 1.000.000 VNĐ + 01 Thẻ Bkav Pro
+
+A. Về Tác giả
+
+1. Họ và tên : Đỗ Văn Sơn
+2. Account WhiteHat Forum : Ddos
+
+B. Nội..." />
+	
+	<meta property="og:site_name" content="WhiteHat.vn" />
+
+<meta property="og:image" content="https://whitehat.vn/data/avatars/m/41/41623.jpg?1490171876" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://whitehat.vn/threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/" />
+<meta property="og:title" content="[Kết quả] [KT01] Các công cụ khai thác lỗ hổng SQL Injection trên ứng dụng Web" />
+<meta property="og:description" content="[IMG]
+ 
+
+
+Giải thưởng:Giải nhất: 1.000.000 VNĐ + 01 Thẻ Bkav Pro
+
+A. Về Tác giả
+
+1. Họ và tên : Đỗ Văn Sơn
+2. Account WhiteHat Forum : Ddos
+
+B. Nội..." />
+
+<meta property="fb:app_id" content="533331473386902" />
+<meta property="fb:admins" content="533331473386902" />
+	
+
+    
+    
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127419897-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127419897-1');
+</script>
+
+<script type="text/javascript" src="/js/hammer.min.js">
+<script type="text/javascript" src="/js/jquery.modal.js"></script>
+<script type="text/javascript" src="js/jquery-validation/dist/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="/css/css/font-awesome.min.css" media="screen" />
+<link rel="stylesheet" href="/css/jquery.modal.css" media="screen" />
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//analytics.bkav.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '39']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Piwik Code -->
+<script>
+//Redirect Dien tap
+href = window.location.href;
+href = href.toLowerCase();
+if(href=="https://whitehat.vn/dientap"){
+    window.location.replace("https://whitehat.vn/forums/dien-tap-an-ninh-mang.57/");                      
+} 
+if(href=="https://whitehat.vn/dangky"){
+    window.location.replace("https://whitehat.vn/dangky");                      
+} 
+if(href=="https://whitehat.vn/cybersecuritydrills"){
+    window.location.replace("https://wargame.whitehat.vn/CyberSecurityDrills");                      
+} 
+if(href=="https://whitehat.vn/threads/ke-hoach-su-kien-whitehat-nam-2017.8244/"){
+    $("[name='description']").attr('content', 'Nơi thông báo lịch kế hoạch sự kiện năm 2017');                    
+}
+
+</script>
+
+<script>
+//Mobile redirect 
+width = $(window).width();
+if(width < 900) {
+    href = window.location.href;
+    homehref = 'https://whitehat.vn/';
+    if(href==homehref){
+        window.location.replace("https://whitehat.vn/mobile");                      
+    } 
+}
+
+
+var href = window.location.href;
+var patt = new RegExp("\/[0-9]{1,}");
+var match = href.match(patt);
+var redirected = 0;
+if(match) {
+    redirect = 0;
+    vbb4patt = new RegExp("threads\/[0-9]{1,}");
+    if(href.indexOf('.html')!=-1 && vbb4patt.test(href)){
+        isOld = 1;
+        redirect = 1;
+    }
+    else if(href.indexOf('/forum/')!=-1){
+        isOld = 0;
+        redirect = 1;
+    }
+    
+    var patt2 = new RegExp("[0-9]{1,}");
+    var match2 = match[0].match(patt2);
+    var nodeid = match2[0];
+    if(redirect!=0) {
+         $.post("/get_thread_id.php",
+            {
+              nodeid: nodeid,
+              isOld : isOld
+            },
+            function(data,status){
+                homehref = 'https://whitehat.vn/';
+                if(data!=0) {
+                    redirected = 1;
+                    location.replace(homehref+"/threads/"+data);
+                }
+        });
+    }
+}
+</script>
+<style type="text/css">
+#content {
+    //margin-left: 10.5%;
+    //margin-right: 10.5%;
+    max-width: 1024px;
+    margin: auto;
+    background: #f2f2f2;
+    padding: 10px 20px 20px 20px;
+}
+
+#navigation {
+    margin-left: 138px;
+    margin-right: 138px;
+    margin-top:45px;
+}
+
+@media only screen and (max-width: 480px){
+    #content {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    #navigation{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+#headerMover
+{
+    //background:#575f62;
+    background: #61cdf4;
+}
+</style>
+</head>
+
+<body class="node24 node20 SelectQuotable"">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=235566653585648";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+    
+
+<div id="loginBar">
+	<div class="pageWidth">
+		<div class="pageContent">	
+			<h3 id="loginBarHandle">
+				<label for="LoginControl" style="margin-left: 10px;"><a href="login/" class="concealed noOutline" id="login-btn">Đăng nhập </a></label>
+				<label style=""><a href="https://whitehat.vn//login/login" class="concealed noOutline" id="register-btn">| Đăng ký</a></label>
+			</h3>
+			
+			<span class="helper"></span>
+
+			
+		</div>
+	</div>
+</div>
+
+
+<div id="headerMover">
+    <div id="headerProxy"></div>
+
+<div id="content" class="thread_view" style="">	
+    <div class="pageWidth" style="position: relative;">
+        <div class="pageContent">
+            <nav id="mobile-nav">
+                <div id="mySidenav" class="sidenav">
+                    <a href="https://whitehat.vn/mobile">
+                        <div class="sidenav-li sidenav-home">
+                            <img src="/image/css/icon-mobile/home.png" alt="" class="icon-img"></i> Home
+                        </div>
+                    </a>
+                    <div class="sidenav-search">
+                        <input type="text" id="mobile-search" placeholder="Tìm kiếm">
+                        <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+                    </div>   
+                    <a href="https://whitehat.vn/mobile/forumlist">
+                        <div class="sidenav-li">
+                            <img src="/image/css/icon-mobile/diendan.png" alt="" class="icon-img"> Diễn đàn
+                        </div>
+                    </a>    
+                    <a href="https://whitehat.vn/members/">
+                        <div class="sidenav-li">
+                            <img src="/image/css/icon-mobile/thanhvien.png" alt="" class="icon-img"> Thành viên
+                        </div>
+                    </a>
+                    <a href="https://whitehat.vn/find-new/25758/posts">
+                        <div class="sidenav-li">
+                            <img src="/image/css/icon-mobile/cogimoi.png" alt="" class="icon-img"> Có gì mới
+                        </div>
+                    </a>
+                    <a href="https://wargame.whitehat.vn/">
+                        <div class="sidenav-li">
+                            <img src="/image/css/icon-mobile/wargame.png" alt="" class="icon-img"> WarGame
+                        </div>
+                    </a>
+                    <a href="http://tools.whitehat.vn/?tabid=43">
+                        <div class="sidenav-li">
+                            <img src="/image/css/icon-mobile/tool.png" alt="" class="icon-img"> Tool
+                        </div>
+                    </a>
+                    <a href="https://whitehat.vn/threads/gioi-thieu-ve-whitehat-forum.1770/">
+                        <div class="sidenav-li">
+                            <img src="/image/css/icon-mobile/gioithieu.png" alt="" class="icon-img"> Giới thiệu
+                        </div>
+                    </a>   
+                    <a href="/threads/8741">
+                        <div class="sidenav-li">
+                            <img src="/image/css/icon-mobile/faq.png" alt="" class="icon-img"> FAQ dành cho người mới bắt đầu
+                        </div>
+                    </a>   
+                </div>
+                <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()" class="open-nav" style="display: none;">&#9776;</span> -->
+                <img src="image/css/nav-icon.png" alt="" class="open-nav" onclick="openNav()" style="margin-top: 5px; margin-bottom: 5px">
+                <script>
+                var isClickedNav = 0;
+                function openNav() {
+                    
+                    $(".visitorTabs").fadeOut(500);
+                    $("#loginBarHandle").fadeOut(500);
+                    document.getElementById("mySidenav").style.width = "270px";
+                    //document.getElementById("headerMover").style.marginLeft = "270px";
+                }
+                
+                function closeNav() {
+                    $(".visitorTabs").fadeIn(500);
+                    $("#loginBarHandle").fadeIn(500);
+                    document.getElementById("mySidenav").style.width = "0";
+                    //document.getElementById("headerMover").style.marginLeft= "0";
+                }
+
+                $("#mySidenav").mouseenter(function() {
+                    isClickedNav = 1
+                });
+                $("#mySidenav").mouseleave(function() {
+                    isClickedNav = 0
+                });
+
+                $("html").click(function(){ 
+                    if (!isClickedNav) {
+                        width = $("#mySidenav").css('width');
+                        if(width=="300px")
+                            closeNav();
+                    }
+                });
+                </script>
+            </nav>
+
+<div class="navTabs">
+    
+
+<div id="searchBar" class="pageWidth">
+	
+	<span id="QuickSearchPlaceholder" title="Tìm kiếm">Tìm kiếm</span>
+	<div style="position: absolute; right: 160px; top: 9px;"><div class="fb-like" data-href="https://www.facebook.com/WhiteHat.vn/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div></div>
+	<fieldset id="QuickSearch">
+		<i class="fa fa-search fa-lg" aria-hidden="true" style="    position: absolute;
+    color: #575f62;
+    right: 10px;
+    top: 10px;"></i>
+		<form action="search/search" method="post" class="formPopup" style="max-width: 200px;" id="form-search">
+			
+			<div class="primaryControls">
+				<!-- block: primaryControls-->
+				<input type="search" style="width: 175px;" name="keywords" value="" class="textCtrl" placeholder="Tìm kiếm..." title="Nhập từ khóa và ấn Enter" id="QuickSearchQuery" />				
+				<!-- end block: primaryControls -->
+			</div>
+			
+			<div class="secondaryControls">
+				<div class="controlsWrapper">
+				
+					<!-- block: secondaryControls -->
+					<dl class="ctrlUnit">
+						<dt></dt>
+						<dd><ul>
+							<li><label><input type="checkbox" name="title_only" value="1"
+								id="search_bar_title_only" class="AutoChecker"
+								data-uncheck="#search_bar_thread" /> Chỉ tìm trong tiêu đề</label></li>
+						</ul></dd>
+					</dl>
+				
+					<dl class="ctrlUnit">
+						<dt><label for="searchBar_users">Được gửi bởi thành viên:</label></dt>
+						<dd>
+							<input type="text" style="max-width: 170px" name="users" value="" class="textCtrl AutoComplete" id="searchBar_users" />
+							<p class="explain">Dãn cách tên bằng dấu phẩy(,).</p>
+						</dd>
+					</dl>
+				
+					<dl class="ctrlUnit">
+						<dt><label for="searchBar_date">Mới hơn ngày:</label></dt>
+						<dd><input type="date" style="max-width: 170px;" name="date" value="" class="textCtrl" id="searchBar_date" /></dd>
+					</dl>
+					
+					
+					<dl class="ctrlUnit">
+						<dt></dt>
+						<dd><ul>
+								
+									<li><label title="Search only [Kết quả] [KT01] Các công cụ khai thác lỗ hổng SQL Injection trên ứng dụng Web"><input type="checkbox" name="type[post][thread_id]" value="2869"
+	id="search_bar_thread" class="AutoChecker"
+	data-uncheck="#search_bar_title_only, #search_bar_nodes" /> Search this thread only</label></li>
+								
+									<li><label title="Search only Web Security"><input type="checkbox" name="nodes[]" value="24"
+	id="search_bar_nodes" class="Disabler AutoChecker" checked="checked"
+	data-uncheck="#search_bar_thread" /> Search this forum only</label>
+	<ul id="search_bar_nodes_Disabler">
+		<li><label><input type="checkbox" name="type[post][group_discussion]" value="1"
+			id="search_bar_group_discussion" class="AutoChecker"
+			data-uncheck="#search_bar_thread" /> Hiển thị kết quả dạng Chủ đề</label></li>
+	</ul></li>
+								
+						</ul></dd>
+					</dl>
+					
+				</div>
+				<!-- end block: secondaryControls -->
+				
+				<dl class="ctrlUnit submitUnit">
+					<dt></dt>
+					<dd>
+						<input type="submit" value="Tìm kiếm" class="button primary Tooltip" title="Tìm ngay" />
+						<div class="Popup" id="commonSearches">
+							<a rel="Menu" class="button NoPopupGadget Tooltip" title="Tìm kiếm hữu ích" data-tipclass="flipped"><span class="arrowWidget"></span></a>
+							<div class="Menu">
+								<div class="primaryContent menuHeader">
+									<h3>Tìm kiếm hữu ích</h3>
+								</div>
+								<ul class="secondaryContent blockLinksList">
+									<!-- block: useful_searches -->
+									<li><a href="find-new/posts?recent=1" rel="nofollow">Bài viết gần đây</a></li>
+									
+									<!-- end block: useful_searches -->
+								</ul>
+							</div>
+						</div>
+						<a href="search/" class="button moreOptions Tooltip" title="Tìm nâng cao">Thêm...</a>
+					</dd>
+				</dl>
+				
+			</div>
+			
+			<input type="hidden" name="_xfToken" value="" />
+		</form>		
+	</fieldset>
+	
+</div>
+    <ul class="publicTabs">
+        <!--<li style="float: right; margin-top: 3px;"><div class="fb-like" data-href="https://www.facebook.com/WhiteHat.vn/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div></li>-->
+        <!-- home -->
+        
+            <!--<li class="navTab home PopupClosed"><a href="https://whitehat.vn/" class="navLink">Trang chủ</a></li>-->
+        
+        
+        
+        <!-- extra tabs: home -->
+        
+        
+            
+                <!--<li class="navTab articles Popup PopupControl PopupClosed">
+            
+                <a href="https://whitehat.vn/articles/" class="navLink">Home</a>
+                <a href="https://whitehat.vn/articles/" class="SplitCtrl" rel="Menu"></a>
+                
+                <div class="Menu JsOnly tabMenu articlesTabLinks">
+                    <div class="primaryContent menuHeader">
+                        <h3>Home</h3>
+                        <div class="muted">Liên kết nhanh</div>
+                    </div>
+                    <ul class="secondaryContent blockLinksList">
+	
+	<li><a href="find-new/posts" rel="nofollow">Bài viết gần đây</a></li>
+	<li><a href="recent-activity/">Hoạt động gần đây</a></li>
+
+	<li style="width: 50px; height: 10px;"></li>
+	<li><a href="articles/authors">Authors</a></li>
+	
+</ul>
+                </div>
+            </li>-->
+            
+            
+    
+            
+        
+        
+        <li class="navTab articles PopupClosed" style="float:right">
+            <a href="/?threads/1770" class="navLink">Giới thiệu</a>
+        </li>
+        <li class="navTab articles PopupClosed" style="float:right">
+            <a href="/?threads/7078/" class="navLink">Vinh danh</a>
+        </li>
+        <li class="navTab articles PopupClosed" style="float:right">
+            <a href="http://tools.whitehat.vn/?tabid=43" class="navLink">Tool</a>
+        </li>
+        <li class="navTab articles PopupClosed" style="float:right">
+            <a href="https://wargame.whitehat.vn/" class="navLink">Wargame</a>
+        </li>
+        <li class="navTab articles PopupClosed" style="float:right">
+            <a href="/video" class="navLink">Video</a>
+        </li>
+        <li class="navTab articles PopupClosed" style="float:right">
+            <a href="index.php?find-new/posts" class="navLink">Có gì mới?</a>
+        </li>
+        
+        <!-- forums -->
+        
+            <li class="navTab forums bold Popup PopupControl PopupClosed" style="margin-left: -22px;">
+            
+                <a href="https://whitehat.vn/" class="navLink">Diễn đàn</a>
+                <a href="https://whitehat.vn/" class="SplitCtrl" rel="Menu"></a>
+                
+                <div class="Menu JsOnly tabMenu forumsTabLinks">
+                    <div class="primaryContent menuHeader">
+                        <h3>Diễn đàn</h3>
+                        <div class="muted">Liên kết nhanh</div>
+                    </div>
+                    <ul class="secondaryContent blockLinksList">
+                    
+                        
+                        <li><a href="search/?type=post">Tìm kiếm diễn đàn</a></li>
+                        
+                        <li><a href="find-new/posts" rel="nofollow">Bài viết gần đây</a></li>
+                    
+                    </ul>
+                </div>
+            </li>
+        
+        
+        
+        <!-- extra tabs: middle -->
+        
+        
+        
+        <!-- members -->
+        
+            <li class="navTab members   Popup PopupControl PopupClosed">
+            
+                <a href="https://whitehat.vn/members/" class="navLink">Thành viên</a>
+                <a href="https://whitehat.vn/members/" class="SplitCtrl" rel="Menu"></a>
+                
+                <div class="Menu JsOnly tabMenu membersTabLinks">
+                    <div class="primaryContent menuHeader">
+                        <h3>Thành viên</h3>
+                        <div class="muted">Liên kết nhanh</div>
+                    </div>
+                    <ul class="secondaryContent blockLinksList">
+                    
+                        <li><a href="members/">Thành viên tiêu biểu</a></li>
+                        
+                        <li><a href="online/">Đang truy cập</a></li>
+                        <li><a href="recent-activity/">Hoạt động gần đây</a></li>
+                        <li><a href="find-new/profile-posts">New Profile Posts</a></li>
+                    
+                    </ul>
+                </div>
+            </li>
+                       
+        
+        <!-- extra tabs: end -->
+        
+
+        <!-- responsive popup -->
+        <li class="navTab navigationHiddenTabs Popup PopupControl PopupClosed" style="display:none">    
+                        
+            <a rel="Menu" class="navLink NoPopupGadget"><span class="menuIcon">Menu</span></a>
+            
+            <div class="Menu JsOnly blockLinksList primaryContent" id="NavigationHiddenMenu"></div>
+        </li>
+            
+        
+        <!-- no selection -->
+        
+        
+    </ul>
+    
+</div>
+
+<span class="helper"></span>
+            
+        </nav>  
+            <!-- main content area -->
+            
+            
+            
+            
+                        
+                        
+                        
+                        
+                        <div id="breadBoxTop1" class="breadBoxTop ">
+                            
+                            
+
+<nav>
+	
+		
+			
+				
+			
+		
+			
+				
+			
+		
+	
+
+	<fieldset class="breadcrumb">
+		<a href="misc/quick-navigation-menu?selected=node-24" class="OverlayTrigger jumpMenuTrigger" data-cacheOverlay="true" title="Mở điều hướng nhanh"><!--Jump to...--></a>
+			
+		<div class="boardTitle"><strong>WhiteHat.vn</strong></div>
+		
+		<span class="crumbs">
+			
+				<span class="crust homeCrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+					<a href="https://whitehat.vn/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+					<span class="arrow"><span></span></span>
+				</span>
+			
+			
+				<span class="crust selectedTabCrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+					<a href="https://whitehat.vn/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Diễn đàn</span></a>
+					<span class="arrow"><span>&gt;</span></span>
+				</span>
+			
+			
+			
+				
+					<span class="crust" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+						<a href="https://whitehat.vn/#thao-lun.20" class="crumb" rel="up" itemprop="url"><span itemprop="title">Thảo luận</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+					<span class="crust" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+						<a href="https://whitehat.vn/forums/web-security.24/" class="crumb" rel="up" itemprop="url"><span itemprop="title">Web Security</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+			
+		</span>
+	</fieldset>
+</nav>
+                        </div>
+                        
+                        
+                        
+                    
+                        <!--[if lt IE 8]>
+                            <p class="importantMessage">You are using an out of date browser. It  may not display this or other websites correctly.<br />You should upgrade or use an <a href="https://www.google.com/chrome" target="_blank">alternative browser</a>.</p>
+                        <![endif]-->
+
+                        
+                        
+
+                      
+                        
+                        
+                        
+                                          
+                            <!-- h1 title, description -->
+                            <div class="titleBar">
+                                
+                                <h1 id="title-h1" style="font-size:16pt; display: none;">[Kết quả] [KT01] Các công cụ khai thác lỗ hổng SQL Injection trên ứng dụng Web</h1>
+                                
+                                <p id="pageDescription" class="muted ">
+	Thảo luận trong '<a href="forums/web-security.24/">Web Security</a>' bắt đầu bởi <a href="members/sunny.41623/" class="username" dir="auto">sunny</a>, <a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/"><span class="DateTime" title="28/10/14, 07:10 PM lúc 7:45 PM">28/10/14, 07:10 PM</span></a>.
+</p>
+                            </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- main template -->
+                        
+	
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+<div class="pageNavLinkGroup" id="topPageNavLinkGroup">
+	<div style="background: #ff5800;
+    height: 30px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 13px;
+	    border: 1px solid #C9CED2;"> 
+		<a href="#QuickReply" id="quickRepBtn"><button style="background: #0094FF;
+    border: 1px solid rgb(254,89,0);
+    width: 125px;
+    height: 27px;
+    margin-top: -2px;"><span style="color: white;">+ Trả lời</span></button></a>
+	<script type="text/javascript">
+		$("#quickRepBtn").on("click", function( e ) {
+    
+		    e.preventDefault();
+		
+		    $("body, html").animate({ 
+		        scrollTop: $( $(this).attr('href') ).offset().top 
+		    }, 600);
+		    
+		});
+	</script>
+	<style type="text/css">
+		.threadnav *{
+			color: white;
+		}
+		.SelectionCount {
+			color: white!important;
+		}
+	</style>
+	
+	<div class="linkGroup SelectionCountContainer threadnav" style="">
+		
+				
+	</div>
+	<div class="fb-share-button" id="share-button" style="float:right; margin-top: 3px;" data-href="" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+	<script>
+	href = window.location.href;
+	$("#share-button").attr('data-href',href);
+	</script>
+	
+	</div>	
+</div>
+
+
+
+
+
+<form action="inline-mod/post/switch" method="post"
+	class="InlineModForm section"
+	data-cookieName="posts"
+	data-controls="#InlineModControls"
+	data-imodOptions="#ModerationSelect option">
+	<ol class="messageList" id="messageList">
+		
+			
+				
+
+
+<li id="post-8601" class="message   " data-author="sunny">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/sunny.41623/" class="avatar Av41623m" data-avatarhtml="true"><img src="data/avatars/m/41/41623.jpg?1490171876" width="96" height="96" alt="sunny" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/sunny.41623/" class="username" dir="auto" itemprop="name">sunny</a>
+			<em class="userTitle" itemprop="title">VIP Members</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">30/06/14, 10:06 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=41623" class="concealed" rel="nofollow">Bài viết: 1,894</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						867
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/sunny.41623/trophies" class="OverlayTrigger concealed">113</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+			
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+				
+			
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div style="text-align: center"><br />
+<img src="https://whitehat.vn/image/xenforo_image/1490893096WhiteHat.jpg" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1490893096WhiteHat.jpg" />&#8203;</div> <br />
+<br />
+<br />
+<b>Giải thưởng</b>:<b>Giải nhất: 1.000.000 VNĐ + 01 Thẻ Bkav Pro</b><br />
+<br />
+<b>A. Về Tác giả</b><br />
+<br />
+1. Họ và tên : <b>Đỗ Văn Sơn</b><br />
+2. Account WhiteHat Forum : <b>Ddos</b><br />
+<br />
+<b>B. Nội dung bài dự thi </b><br />
+<br />
+<b>Mục lục</b><br />
+<br />
+[HIDE]<br />
+<br />
+I. Giới thiệu về lỗ hổng Web và SQL Injection <div style="padding-left: 30px">1. Sự phát triển và lợi ích của Web<br />
+<br />
+2. Giới thiệu về lỗ hổng Web&#8203;</div> II. Khai thác lỗi SQL Injection với SQLMap  <div style="padding-left: 30px">1. Giới thiệu về SQLMap<br />
+<br />
+2. Cài đặt SQLMap<br />
+ &#8203;</div> <div style="padding-left: 60px">a. Cài đặt SQLMap trên Windows XP/7/8<br />
+b. Cài đặt SQLMap trên Linux<br />
+<br />
+&#8203;</div> <div style="padding-left: 30px"><br />
+3. Hướng dẫn sử dụng SQLMap để khai thác lỗi SQL&#8203;</div> <div style="padding-left: 60px"><br />
+a. Tạo bài Lab với DVWA.<br />
+b. Hướng dẫn sử dụng SQLMap để tấn công DVWA<br />
+c. Đơn giản việc sử dụng SQLMap với BurpSuite + CO2&#8203;</div>[/HIDE]<br />
+<b>I. Giới thiệu về lỗ hổng Web và SQL Injection</b><br />
+<br />
+<b>1. Sự phát triển và lợi ích của Web</b><br />
+<br />
+[HIDE]<br />
+Trong những ngày đầu trong sự phát triển của Internet, Wordl Wide Web chỉ bao gổm các website. Nó đơn giản chỉ là nguồn lưu trữ các dữ liệu tĩnh (chủ yếu là văn bản dạng text). Và nhiệm vụ của một trình duyệt web đơn giản chỉ là việc yêu cầu và hiển thị các dữ liệu tĩnh này. Ngày nay, World Wide Web không chỉ đơn thuần là lưu trữ các dữ liệu tĩnh nữa, thay vào đó là rất nhiều các chức năng đa dạng hơn (ví dụ: tìm kiếm, giao dịch tài chính, đăng ký và đăng nhập...) Có thể nói, với thế giới của World Wide Web chúng ta có thể làm mọi thứ phục vụ cho cuộc sống của con người. Chính nhờ những lợi ích tuyệt vời này, mà ngày càng có nhiều doanh nghiệp ưu tiên việc áp dụng các ứng dụng web vào việc quản lý, tổ chức và phát triển của doanh nghiệp. Song, bên cạnh những lơi ích này, khi triển khai việc áp dụng công nghệ web vào doanh nghiệp cũng đặt ra một vấn đề lớn cho doanh nghiệp đó là vấn đề bảo mật.[/HIDE]<br />
+<b>2. Giới thiệu về lỗ hổng Web</b><br />
+<br />
+[HIDE]<br />
+Trong thực tế, có khá nhiều ứng dụng web không an toàn và phải đối mặt với việc bị khai thác. Dưới đây là một số thống kê về số lượng các lỗ hổng trên ứng dụng web được tìm ra trong giai đoạn 1996-2013, được thống kê bởi IBM. <div style="text-align: center"><br />
+ <img src="https://whitehat.vn/image/xenforo_image/14899399371.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/14899399371.png" />&#8203;</div> <br />
+<br />
+Lỗ hổng trên ứng dụng web có thể được chia thành hai phần chính:<br />
+<br />
+• Lỗ hổng trên server: có thể kể tới như lỗ hổng liên quan tới việc xác thực người dùng, lỗ hổng liên quan tới việc quản lý phiên (sesion), lỗ hổng liên quan tới cơ sở dữ liệu....<br />
+• Lỗ hổng trên client: có thể kể tới như Cross-site Scripting, On-site Request Forgery....<br />
+<b>3. SQL Injection</b><br />
+<br />
+Một thực tế rằng, gần như tất cả các ứng dụng đều dựa trên việc lưu trữ dữ liệu để quản lý dữ liệu mà nó được xử lý trong một ứng dụng. Trong rất nhiều trường hợp, dữ liệu này có thể là một logic hạt nhân ứng dụng mà nó bao gồm tài khoản người dùng, thiết lập quyền, thiết lập cấu hình ứng dụng...Lưu trữ dữ liệu đã trở nên linh hoạt hơn bằng việc tổ chức dữ liệu trong một định dạng cấu trúc, truy cập bằng cách sử dụng các định dạng truy vấn đã được xác định trước cho từng loại cơ sở dữ liệu, cũng như việc quản lý các dữ liệu này.<br />
+<br />
+Thông thường, ứng dụng sử dụng một cấp độ đặc quyền chung cho tất cả các loại của việc try cập tới lưu trữ dữ liệu cũng như việc xử lý dữ liệu trên các ứng dụng người dùng khác nhau. Nếu kẻ tấn công có thể tác động tới tương tác của ứng dụng với lưu trữ dữ liệu, để ăn cắp hoặc sửa đổi các dữ liệu khác nhau, kẻ tấn công thường vượt qua tất cả cơ chế kiểm soát đối với việc truy cập dữ liệu mà được áp dụng ở tầng ứng dụng.<br />
+<br />
+Hầu hết các ứng dụng web dùng một cơ sở dữ liệu để lưu trữ các thông tin khác nhau mà nó cần để hoạt động. Ví dụ, một ứng dụng web được triển khai bởi một nhà bán lẻ trực tuyến có thể sử dụng một cơ sở dữ liệu để lưu trữ các thông tin như: tài khoản người dùng, danh tính, thông tin các nhân; mô tả và giá của các mặt hàng, thông tin oders, thông tin thanh toán... Việc truy cập thông tin bên trong một cơ sở dữ liệu gọi là Structured Query Language (SQL). SQL được sử dụng để đọc, cập nhật, thêm, và xóa thông tin được tổ chức bên trong cơ sở dữ liệu. SQL là một ngôn ngữ được biên dịch và các ứng dụng web thường xây dựng các câu lệnh SQL mà nó kết hợp với dữ liệu người dùng cung cấp. Nếu điều này được thực hiện một cách không an toàn, các ứng dụng có thể bị SQL injection. Lỗi này là một trong những lỗi trong ứng dụng web nổi tiếng nhất đã ảnh hưởng tới các ứng dụng web. Trong trường hợp nghiêm trọng, SQL injection có thể cho phép kẻ tấn công có thể đọc và thay đổi tất cả dữ liệu được lưu trữ bên trong cơ cở dữ liệu, thâm chí kiểm soát máy chủ mà cơ sở dữ liệu này đang chạy. Hãy thử tưởng tượng, nếu một websites bán hàng trực tuyến, mà kẻ tấn công có thể thay đổi giá của mỗi sản phẩm, hoặc xóa một số mặt hàng trên website thì điều gì sẽ xảy ra? Để thấy được sự nguy hiểm của SQL Injection, các bạn có thể nhìn biểu đồ dưới đây: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/14899399371.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/14899399371.png" />&#8203;</div> <br />
+<br />
+<br />
+Đây là thống kê 10 lỗ hổng nguy hiểm nhất của ứng dựng web được báo cáo hàng năm bởi owasp.<br />
+<br />
+Nguyên nhân do đâu mà sinh ra SQL Injection:<br />
+<br />
+Các nhà phát triển ứng dụng không thực hiện việc kiểm tra đầu vào khi người dùng đệ trình dữ liệu =&gt; Dữ liệu đầu vào của người dùng là một câu lệnh truy vấn của SQL =&gt;Dẫn tới việc dữ liệu này sẽ tương tác với cơ sở dữ liệu và hiển thị những thông tin quan trọng.[/HIDE]<br />
+<b>II. Khai thác lỗi SQL Injection với SQLMap</b><b>1. Giới thiệu về SQLMap</b><br />
+<br />
+[HIDE]<br />
+Hiện nay, có rất nhiều các công cụ được phát hành cho việc tìm kiếm cũng như khai thác lỗi SQL cả miễn phí và tính phí. Các phần mềm tính phí như: Havij SQL Injection, IBM Security AppScan, Acunetix Web Vulnerablitily Scanner,,,,, các phần miễn phí như sqlninja, sqlmap ... Với các phiên bản tính phí, không phải ai trong số chúng ta cũng có thể bỏ tiền ra để mua một trong số các phần mềm trên để học và tìm hiểu còn các phiên bản miễn phí thì lại không hỗ trợ đầy đủ các tính năng quan trọng trong việc khai thác và tìm lỗi. Hình dưới đây là một so sánh nhỏ giữa một phiên bản miễn phí và trả phí của Havij. <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/14899399372.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/14899399372.png" />&#8203;</div> <br />
+<br />
+<br />
+Có thể thấy, phiên bản miễn phí giới hạn khá nhiều tính năng quan trọng. Nhưng thật may mắn, có một công cụ mặc dù miễn phí nhưng hỗ trợ đầy đủ tất cả các tính năng liên quan tới việc khai thác lỗ hổng SQL đó chính là SQLMap. <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/14899399373.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/14899399373.png" />&#8203;</div> <br />
+<br />
+<br />
+Vậy SQLMap là gì?<br />
+<br />
+SQLMap là một công cụ mã nguồn mở và hoàn toàn miễn phí được sử dụng để phát hiện và khai thác lỗi SQL Injection. Nó Có rất nhiều chức năng cho việc tự động các quá trình phát hiện và khai thác (firgerprinting cơ sở dữ liệu, truy cập file hệ thống, thực hiện lệnh...). Tác giả của SQLMap là Bernardo Damele Assumpcao Guimaraes.<br />
+Giao diện chính khi sử dụng SQLMap là thao tác dòng lệnh. Để hiển thị tất cả các tùy chọn trong SQLMap bạn có thể dùng lệnh:<br />
+<br />
+Sqlmap –h<br />
+<br />
+Dưới đây là danh sách đầy đủ các tùy chọn trong SQLMap:<br />
+<br />
+Options:<br />
+<br />
+• –version show program’s version number and exit<br />
+• -h, –help show this help message and exit<br />
+• -v VERBOSE Verbosity level: 0-6 (default 1)<br />
+Target:<br />
+At least one of these options has to be specified to set the source to get target urls from<br />
+• -d DIRECT Direct connection to the database<br />
+• -u URL, –url=URL Target URL<br />
+• -l LOGFILE Parse targets from Burp or WebScarab proxy logs<br />
+• -m BULKFILE Scan multiple targets enlisted in a given textual file<br />
+• -r REQUESTFILE Load HTTP request from a file<br />
+• -g GOOGLEDORK Process Google dork results as target URLs<br />
+• -c CONFIGFILE Load options from a configuration INI file<br />
+<br />
+Request:<br />
+<br />
+These options can be used to specify how to connect to the target URL.<br />
+<br />
+• –data=DATA Data string to be sent through POST<br />
+• –param-del=PDEL Character used for splitting parameter values<br />
+• –cookie=COOKIE HTTP Cookie header<br />
+• –load-cookies=LOC File containing cookies in Netscape/wget format<br />
+• –cookie-urlencode URL Encode generated cookie injections<br />
+• –drop-set-cookie Ignore Set-Cookie header from response<br />
+• –user-agent=AGENT HTTP User-Agent header<br />
+• –random-agent Use randomly selected HTTP User-Agent header<br />
+• –randomize=RPARAM Randomly change value for given parameter(s)<br />
+• –force-ssl Force usage of SSL/HTTPS requests<br />
+• –host=HOST HTTP Host header<br />
+• –referer=REFERER HTTP Referer header<br />
+• –headers=HEADERS Extra headers (e.g. “Accept-Language: frnETag: 123″)<br />
+• –auth-type=ATYPE HTTP authentication type (Basic, Digest or NTLM)<br />
+• –auth-cred=ACRED HTTP authentication credentials (name<img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie7" alt=":p" title="Stick Out Tongue    :p" />assword)<br />
+• –auth-cert=ACERT HTTP authentication certificate (key_file,cert_file)<br />
+• –proxy=PROXY Use a HTTP proxy to connect to the target url<br />
+• –proxy-cred=PCRED HTTP proxy authentication credentials (name<img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie7" alt=":p" title="Stick Out Tongue    :p" />assword)<br />
+• –ignore-proxy Ignore system default HTTP proxy<br />
+• –delay=DELAY Delay in seconds between each HTTP request<br />
+• –timeout=TIMEOUT Seconds to wait before timeout connection (default 30)<br />
+• –retries=RETRIES Retries when the connection timeouts (default 3)<br />
+• –scope=SCOPE Regexp to filter targets from provided proxy log<br />
+• –safe-url=SAFURL Url address to visit frequently during testing<br />
+• –safe-freq=SAFREQ Test requests between two visits to a given safe url<br />
+• –skip-urlencode Skip URL encoding of POST data<br />
+• –eval=EVALCODE Evaluate provided Python code before the request (e.g.<br />
+o “import hashlib;id2=hashlib.md5(id).hexdigest()”)<br />
+<br />
+Optimization:<br />
+<br />
+These options can be used to optimize the performance of SQLmap.<br />
+<br />
+• -o Turn on all optimization switches<br />
+• –predict-output Predict common queries output<br />
+• –keep-alive Use persistent HTTP(s) connections<br />
+• –null-connection Retrieve page length without actual HTTP response body<br />
+• –threads=THREADS Max number of concurrent HTTP(s) requests (default 1)<br />
+<br />
+Injection:<br />
+<br />
+These options can be used to specify which parameters to test for,and provide custom injection payloads and optional tampering scripts<br />
+<br />
+• -p TESTPARAMETER Testable parameter(s)<br />
+• –dbms=DBMS Force back-end DBMS to this value<br />
+• –os=OS Force back-end DBMS operating system to this value<br />
+• –invalid-bignum Use big numbers for invalidating values<br />
+• –invalid-logical Use logical operations for invalidating values<br />
+• –no-cast Turn off payload casting mechanism<br />
+• –prefix=PREFIX Injection payload prefix string<br />
+• –suffix=SUFFIX Injection payload suffix string<br />
+• –skip=SKIP Skip testing for given parameter(s)<br />
+• –tamper=TAMPER Use given script(s) for tampering injection data<br />
+<br />
+Detection:<br />
+<br />
+These options can be used to specify how to parse and compare page content from HTTP responses when using the blind SQL injection technique.<br />
+• –level=LEVEL Level of tests to perform (1-5, default 1)<br />
+• –risk=RISK Risk of tests to perform (0-3, default 1)<br />
+• –string=STRING String to match in the response when query is valid<br />
+• –regexp=REGEXP Regexp to match in the response when query is valid<br />
+• –code=CODE HTTP response code to match when the query is valid<br />
+• –text-only Compare pages based only on the textual content<br />
+• –titles Compare pages based only on their titles<br />
+<br />
+Techniques:<br />
+<br />
+These options can be used to tweak testing of specific SQL injection techniques.<br />
+• –technique=TECH SQL injection techniques to test for (default “BEUST”)<br />
+• –time-sec=TIMESEC Seconds to delay the DBMS response (default 5)<br />
+• –union-cols=UCOLS Range of columns to test for UNION query SQL injection<br />
+• –union-char=UCHAR Character to use for bruteforcing number of columns<br />
+• –dns-domain=DNAME Domain name used for DNS exfiltration attack<br />
+<br />
+Fingerprint:<br />
+<br />
+• –f, –fingerprint Perform an extensive DBMS version fingerprint<br />
+Enumeration:<br />
+These options can be used to enumerate the back-end database management system information, structure and data contained in the tables. Moreover you can run your own SQL statements.<br />
+• -b, –banner Retrieve DBMS banner<br />
+• –current-user Retrieve DBMS current user<br />
+• –current-db Retrieve DBMS current database<br />
+• –is-dba Detect if the DBMS current user is DBA<br />
+• –users Enumerate DBMS users<br />
+• –passwords Enumerate DBMS users password hashes<br />
+• –privileges Enumerate DBMS users privileges<br />
+• –roles Enumerate DBMS users roles<br />
+• –dbs Enumerate DBMS databases<br />
+• –tables Enumerate DBMS database tables<br />
+• –columns Enumerate DBMS database table columns<br />
+• –schema Enumerate DBMS schema<br />
+• –count Retrieve number of entries for table(s)<br />
+• –dump Dump DBMS database table entries<br />
+• –dump-all Dump all DBMS databases tables entries<br />
+• –search Search column(s), table(s) and/or database name(s)<br />
+• -D DB DBMS database to enumerate<br />
+• -T TBL DBMS database table to enumerate<br />
+• -C COL DBMS database table column to enumerate<br />
+• -U USER DBMS user to enumerate<br />
+• –exclude-sysdbs Exclude DBMS system databases when enumerating tables<br />
+• –start=LIMITSTART First query output entry to retrieve<br />
+• –stop=LIMITSTOP Last query output entry to retrieve<br />
+• –first=FIRSTCHAR First query output word character to retrieve<br />
+• –last=LASTCHAR Last query output word character to retrieve<br />
+• –sql-query=QUERY SQL statement to be executed<br />
+• –sql-shell Prompt for an interactive SQL shell<br />
+<br />
+Brute force:<br />
+<br />
+These options can be used to run brute force checks.<br />
+<br />
+• –common-tables Check existence of common tables<br />
+• –common-columns Check existence of common columns<br />
+User-defined function injection:<br />
+These options can be used to create custom user-defined functions<br />
+• –udf-inject Inject custom user-defined functions<br />
+• –shared-lib=SHLIB Local path of the shared library<br />
+<br />
+File system access:<br />
+<br />
+These options can be used to access the back-end database management system underlying file system.<br />
+<br />
+• –file-read=RFILE Read a file from the back-end DBMS file system<br />
+• –file-write=WFILE Write a local file on the back-end DBMS file system<br />
+• –file-dest=DFILE Back-end DBMS absolute filepath to write to<br />
+<br />
+Operating system access:<br />
+<br />
+These options can be used to access the back-end database management system and underlying operating system.<br />
+<br />
+• –os-cmd=OSCMD Execute an operating system command<br />
+• –os-shell Prompt for an interactive operating system shell<br />
+• –os-pwn Prompt for an out-of-band shell, meterpreter or VNC<br />
+• –os-smbrelay One click prompt for an OOB shell, meterpreter or VNC<br />
+• –os-bof Stored procedure buffer overflow exploitation<br />
+• –priv-esc Database process’ user privilege escalation<br />
+• –msf-path=MSFPATH Local path where Metasploit Framework is installed<br />
+• –tmp-path=TMPPATH Remote absolute path of temporary files directory<br />
+<br />
+Windows registry access:<br />
+<br />
+These options can be used to access the back-end database management system Windows registry.<br />
+<br />
+• –reg-read Read a Windows registry key value<br />
+• –reg-add Write a Windows registry key value data<br />
+• –reg-del Delete a Windows registry key value<br />
+• –reg-key=REGKEY Windows registry key<br />
+• –reg-value=REGVAL Windows registry key value<br />
+• –reg-data=REGDATA Windows registry key value data<br />
+• –reg-type=REGTYPE Windows registry key value type<br />
+<br />
+General:<br />
+<br />
+These options can be used to set some general working parameters.<br />
+<br />
+• -t TRAFFICFILE Log all HTTP traffic into a textual file<br />
+• –batch Never ask for user input, use the default behaviour<br />
+• –charset=CHARSET Force character encoding used for data retrieval<br />
+• –check-tor Check to see if Tor is used properly<br />
+• –crawl=CRAWLDEPTH Crawl the website starting from the target url<br />
+• –csv-del=CSVDEL Delimiting character used in CSV output (default “,”)<br />
+• –eta Display for each output the estimated time of arrival<br />
+• –flush-session Flush session file for current target<br />
+• –forms Parse and test forms on target url<br />
+• –fresh-queries Ignores query results stored in session file<br />
+• –hex Uses DBMS hex function(s) for data retrieval<br />
+• –parse-errors Parse and display DBMS error messages from responses<br />
+• –replicate Replicate dumped data into a sqlite3 database<br />
+• –save Save options to a configuration INI file<br />
+• –tor Use Tor anonymity network<br />
+• –tor-port=TORPORT Set Tor proxy port other than default<br />
+• –tor-type=TORTYPE Set Tor proxy type (HTTP – default, SOCKS4 or SOCKS5)<br />
+• –update Update sqlmap<br />
+<br />
+Miscellaneous:<br />
+<br />
+• -z MNEMONICS Use short mnemonics (e.g. “flu,bat,ban,tec=EU”)<br />
+• –beep Sound alert when SQL injection found<br />
+• –check-payload Offline WAF/IPS/IDS payload detection testing<br />
+• –check-waf Check for existence of WAF/IPS/IDS protection<br />
+• –cleanup Clean up the DBMS by sqlmap specific UDF and tables<br />
+• –dependencies Check for missing sqlmap dependencies<br />
+• –disable-hash Disable password hash cracking mechanism<br />
+• –disable-like Disable LIKE search of identificator names<br />
+• –gpage=GOOGLEPAGE Use Google dork results from specified page number<br />
+• –mobile Imitate smartphone through HTTP User-Agent header<br />
+• –page-rank Display page rank (PR) for Google dork results<br />
+• –purge-output Safely remove all content from output directory<br />
+• –smart Conduct through tests only if positive heuristic(s)<br />
+• –test-filter=TSTF Select tests by payloads and/or titles (e.g. ROW)<br />
+• –wizard Simple wizard interface for beginner users<br />
+•<br />
+[*]shutting down at 17:46:04[/HIDE]<br />
+<b>2. Cài đặt SQLMap</b><br />
+<br />
+<b>a. Cài đặt SQLMap trên Windows XP/7/8</b><br />
+<br />
+[HIDE]<br />
+Bước 1: Tải file cài đặt python2.7 và sqlmap<br />
+Bước 2: Tiến hành cài đặt python<br />
+Mở file python2.7 setup và chọn “Install for all user” sau đó click Next <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/14899399374.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/14899399374.png" />&#8203;</div> <br />
+<br />
+<br />
+Chọn nơi cài đặt (Mặc định là C<img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie7" alt=":p" title="Stick Out Tongue    :p" />ython27), sau đó click Next <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/14899399375.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/14899399375.png" />&#8203;</div> <br />
+<br />
+<br />
+Click Next <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/14899399376.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/14899399376.png" />&#8203;</div> <br />
+<br />
+<br />
+Click Finish <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image012.jpg" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image012.jpg" />&#8203;</div> <br />
+<br />
+<br />
+Bước 3: Giải nén file sqlmap vừa tải sau đó copy toàn bộ thư mục sqlmap vào đường dẫn C<img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie7" alt=":p" title="Stick Out Tongue    :p" />ython27 <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image013.jpg" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image013.jpg" />&#8203;</div> <br />
+<br />
+<br />
+Bây giờ, mở cmd và điều hướng tới thư mục vừa lưu sqlmap <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image015.jpg" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image015.jpg" />&#8203;</div> <br />
+<br />
+<br />
+Tất cả đã hoàn thành, bây giờ có thể sử dụng sqlmap. <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image016.jpg" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image016.jpg" />&#8203;</div> <br />
+<br />
+[/HIDE]<br />
+<b>b. Cài đặt SQLMap trên Linux </b><br />
+<br />
+[HIDE]<br />
+Trên Linux, do Python được cài đặt sẵn, vậy nên để sử dụng SQLMap bạn chỉ cần làm bước 3 như trong hướng dẫn với Windows là có thể sử dụng được. Đặc biệt một số phiên bản phân phối của Linux như Kali Linux, BlackBox... đã tích hợp sẵn SQLMap.[/HIDE]<br />
+<b>3. Hướng dẫn sử dụng SQLMap để khai thác lỗi SQL</b><br />
+<br />
+<b>a. Tạo bài Lab với DVWA.</b><br />
+<br />
+[HIDE]<br />
+Damn Vulnerable Web App (DVWA) là một ứng dụng web PHP/MySQL mà có khả năng bị tổn thương. Mục đích chính của DVWA là hỗ trợ cho các học viên, các chuyên gia trong lĩnh vực anh ninh mạng để kiểm tra cũng như nâng cao kỹ năng của họ, và giúp cho các nhà phát triển web hiểu hơn về quá trình của bảo mật ứng dụng web.<br />
+<br />
+Video dưới đây sẽ hướng dẫn việc cài đặt DVWA trên Kali Linux cho mục đích thực hành. <div style="text-align: center">[video=youtube;C6PlSBRiFw4]https://www.youtube.com/watch?v=C6PlSBRiFw4[/video]&#8203;</div> <br />
+<br />
+<br />
+Với Windows, các bạn có thể sử dụng XAMPP cho cài đặt DVWA.[/HIDE]<br />
+<b>b. Hướng dẫn sử dụng SQLMap để tấn công DVWA</b><br />
+<br />
+[HIDE]<br />
+Yêu cầu:<br />
+• DVWA<br />
+• Tamper data<br />
+• Bất kỳ một hệ điều hành đã cài đặt SQLMap (Trong trường hợp này là Kali Linux)<br />
+Mục tiêu:<br />
+• Thống kê username và password trong MYSQL<br />
+• Thống kê tất cả các cơ sở dữ liệu<br />
+• Thống kê tất cả các tables của các cơ sở dữ liệu<br />
+• Thống kê tất cả username và password của một tables<br />
+Các bước thực hiện<br />
+Bước 1: Mở trình duyệt và truy cập vào DVWA, sau đó cho cấp độ bảo mật là “low” <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image019.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image019.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 2: Chọn SQL Injection <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image021.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image021.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 3: Khởi chạy addon Tamper data <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image023.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image023.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 4: Click Start Tamper <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image025.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image025.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 5: Quay trở lại trình duyệt, điền bất kỳ tham số nào (ở đây là 1), sau đó click Submit <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image027.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image027.png" />&#8203;</div> <br />
+<br />
+<br />
+Khi đó, một hội thoại của addon Tamper data sẽ xuất hiện, bạn bỏ check tại dòng Continure Tampering?, sau đó click Submit <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image029.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image029.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 6: Khi bạn nhìn vào addon Tamper data, bạn sẽ nhìn thấy các tham số và addon vừa chụp được. Bạn tìm tới dòng tương ứng với các tham số và bạn đã đệ trình ở trình duyệt web, sau đó, click chọn. Lúc này, bạn sẽ thấy chi tiết về yêu cầu bạn vừa thực hiện (vùng màu đỏ). Có hai tham số bạn cần quan tâm đó là: Referer và Cookie. <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image030.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image030.png" />&#8203;</div> <br />
+<br />
+Sau đó, bạn mở bất kỳ một phần mềm soản thảo nào để lưu lại các giá trị của hai tham số này.<br />
+Bước 7: Mở terminal và nhập lệnh sau:<br />
+sqlmap –u &quot;http://192.168.1.4/dvwa/vulnerabilities/sqli/?id=1&amp;Submit=Submit&quot; --cookie=&quot;PHPSESSID=d1b8hqpf8vvhlbuehtce03dea5; security=low&quot; –b –current-db –current-user<br />
+Trong đó:<br />
+• --cookie : để thiết lập giá trị của cookie, trong trường hợp này chúng ta có thể thay đổi low thành medium hoặc high<br />
+• -u: xác định URL mục tiêu<br />
+• -b: xác định DBMS banner<br />
+• --current-db: xác định cơ sở dữ liệu hiện thời<br />
+• --current-user: xác định user hiện thời <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image032.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image032.png" />&#8203;</div> <br />
+<br />
+Sau khi SQLMap hoàn thành, bạn sẽ nhận được kết quả như hình dưới: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image034.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image034.png" />&#8203;</div> <br />
+<br />
+<br />
+Như bạn có thể thấy được một số thông tin như:<br />
+• DBMS: MySQL 5.0<br />
+• Current user: root<br />
+• Current db: dvwa<br />
+Bước 8: Tiếp đến, chúng ta cần thống kê tất cả các hash của username và password của DBMS. Để thực hiện việc này, dùng lệnh:<br />
+sqlmap –u &quot;http://192.168.1.4/dvwa/vulnerabilities/sqli/?id=1&amp;Submit=Submit&quot; --cookie=&quot;PHPSESSID=d1b8hqpf8vvhlbuehtce03dea5; security=low&quot; –string=”Surname” --users –password<br />
+Trong đó:<br />
+• -string: tring để phù hợp với trang khi truy vấn khả dụng<br />
+• --users: thống kê DBMS users<br />
+• --password: thống kê DBMS user password hashes <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image036.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image036.png" />&#8203;</div> <br />
+<br />
+<br />
+Sau khi SQLMap hoàn thành, bạn sẽ nhận được kết quả như hình dưới: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image038.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image038.png" />&#8203;</div> <br />
+<br />
+<br />
+Trong khi chạy, SQLMap sẽ đưa ra một số tùy chọn cho bạn:<br />
+• Bạn có muốn lưu giá trị hash cho việc xử lý sau không?<br />
+• Bạn có muốn thực hiện một từ điển tấn công để tìm giá trị hash không?<br />
+• Nếu bạn muốn thực hiện từ điển tấn công, SQLMap sẽ sử dụng từ điển mặc định ở trong đường dẫn /usr/share/sqlmap/txt/wordlist.zip . Nếu bạn không muốn sử dụng từ điển này, bạn có thể nhập đường dẫn tới từ điển tấn công khác. Sau đó bấm Enter. <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image040.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image040.png" />&#8203;</div> <br />
+<br />
+<br />
+Sau khi quá trình crack hoàn thành, bạn sẽ nhận được kết quả như hình dưới đây: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image042.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image042.png" />&#8203;</div> <br />
+<br />
+<br />
+Bạn sẽ thấy:<br />
+<br />
+Database management system users:<br />
+<br />
+•<br />
+[*]”@’linux’<br />
+•<br />
+[*]”@’localhost’<br />
+•<br />
+[*]‘phpmyadmin’@’localhost’<br />
+•<br />
+[*]‘root’@’localhost’.....<br />
+<br />
+Database management system users password hashes:<br />
+<br />
+• [bn_drual] [1]:<br />
+<br />
+Password hash: *782EDA8F823B4249943114CB04B49FA6AC3FBE<br />
+.......<br />
+Với các giá trị hash thu được này, bạn có thể sử dụng một số công cụ để crack như cain and able, john the ripper.<br />
+<br />
+Bước 9: Tiếp theo, chúng ta thống kê tất cả các database DBMS, bằng cách dùng lệnh sau:<br />
+sqlmap –u &quot;http://192.168.1.4/dvwa/vulnerabilities/sqli/?id=1&amp;Submit=Submit&quot; --cookie=&quot;PHPSESSID=d1b8hqpf8vvhlbuehtce03dea5; security=low&quot; --dbs<br />
+Trong đó:<br />
+• --dbs: thống các databases DMBS <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image044.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image044.png" />&#8203;</div> <br />
+<br />
+<br />
+Sau khi kết thúc, chúng ta sẽ thu được như hình dưới đây: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image046.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image046.png" />&#8203;</div> <br />
+<br />
+<br />
+Kết quả thu được:<br />
+<br />
+Available database [14]:<br />
+•<br />
+[*]bitnami_drupal7<br />
+•<br />
+[*]bitnami_joomla<br />
+•<br />
+[*]bitnami_moodle<br />
+•<br />
+[*]bitnami_wordpress<br />
+• bWAPP<br />
+• cdcol<br />
+• dvwa<br />
+• forum<br />
+• infomation_schema<br />
+• mysql<br />
+• performance_schema<br />
+• phpmyadmin<br />
+• test<br />
+<br />
+Bước 10 Tiếp đến, chúng ta cần thống kê về dvwa tables, bằng cách dùng lệnh sau:<br />
+sqlmap -u &quot;http://192.168.1.4/dvwa/vulnerabilities/sqli/?id=1&amp;Submit=Submit&quot; --cookie=&quot;PHPSESSID=d1b8hqpf8vvhlbuehtce03dea5; security=low&quot; -D dvwa –tables<br />
+<br />
+Trong đó:<br />
+<br />
+• -D: tên DBMS database để thống kê<br />
+• --tables: thống kê DBMS database tables <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image048.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image048.png" />&#8203;</div> <br />
+<br />
+<br />
+Sau khi kết thúc, kết quả thu được như hình dưới đây: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image050.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image050.png" />&#8203;</div> <br />
+<br />
+<br />
+Chúng ta thu được kết quả về Database: dvwa<br />
+• [2 tables]<br />
+- guestbook<br />
+- users<br />
+<br />
+Bước 11: Tiếp đến chúng ta cần thu thập thông tin về columns của user tables, bằng cách dùng lệnh:<br />
+sqlmap -u &quot;http://192.168.1.4/dvwa/vulnerabilities/sqli/?id=1&amp;Submit=Submit&quot; --cookie=&quot;PHPSESSID=d1b8hqpf8vvhlbuehtce03dea5; security=low&quot; -D dvwa –T users --columns<br />
+Trong đó:<br />
+• -T: DBMS database table để thống kê<br />
+• --columns: thống kê columns của DBMS database tables <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image052.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image052.png" />&#8203;</div> <br />
+<br />
+<br />
+Kết quả thu được như hình dưới đây: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image054.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image054.png" />&#8203;</div> <br />
+<br />
+<br />
+Như chúng ta có thể thấy được thông tin về tables bao gồm các columns: user, avatar, first_name, last_name, password, user_id.<br />
+Bước 12: Cuối cùng, chúng ta cần thu lại tất cả các username và pasword của tables này, bằng các dùng lệnh:<br />
+sqlmap -u &quot;http://192.168.1.4/dvwa/vulnerabilities/sqli/?id=1&amp;Submit=Submit&quot; --cookie=&quot;PHPSESSID=d1b8hqpf8vvhlbuehtce03dea5; security=low&quot; -D dvwa –T users –C user,password –dump<br />
+<br />
+Trong đó:<br />
+<br />
+• -T: DBMS database table để thống kê<br />
+• -C: DBMS database table columns để thống kê<br />
+• --dump: dump các đối tượng trong DBMS database table <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image056.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image056.png" />&#8203;</div> <br />
+<br />
+<br />
+Trong quá trình chạy, SQLMap hỏi chúng ta có crack password về dạng clear-text hay không. Bấm Enter để tiếp tục <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image058.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image058.png" />&#8203;</div> <br />
+<br />
+<br />
+Sau khi hoàn thành, chúng ta thu được kết quả như hình: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image060.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image060.png" />&#8203;</div> <br />
+<br />
+<br />
+Như chúng ta đã thấy từ kết quả, SQLMap đã đưa ra cả username và password ở dạng hash và dạng clear-text.<br />
+<br />
+Nhận xét:<br />
+Mặc dù SQLMap với đầy đủ tính năng như vậy nhưng với việc chỉ có thao tác dòng lệnh sẽ khiến cho những ai không quen với môi trường dòng lệnh sẽ cảm thấy khó để tìm hiểu công cụ này. Để khắc phục vấn đề này, câu trả lời sẽ là BurpSuite + CO2.<br />
+[/HIDE]<br />
+<b>c. Đơn giản việc sử dụng SQLMap với BurpSuite + CO2</b><br />
+<br />
+[HIDE]<br />
+BurpSuite là một ứng dụng Java được sử dụng trong quá trình thử nghiệm thâm nhập (Penetration Testing).<br />
+CO2 là một tiện ích trong BurpSuite nhằm hỗ trợ trong quá trình thử nghiệm thâm nhập được đơn giản và nhanh hơn.<br />
+Để chạy BurpSuite trong Windows, chúng ta cần tải Java và cài đặt trên hệ thống. Sau đó tải BurpSuite<br />
+Trong hướng dẫn này, mình sử dụng BurpSuite trên Kali Linux.<br />
+Bước 1: Khở chạy BurpSuite bằng cách truy cập: Applications =&gt; Kali Linux =&gt; Top 10 Security Tools =&gt; burpsuite <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image062.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image062.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 2: Tiến hành cài đặt tiện ích CO2, bằng cách chọn tab Extender =&gt; Bapp Store <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image064.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image064.png" />&#8203;</div> <br />
+<br />
+<br />
+Sau khi cài đặt thành công, bạn sẽ thấy một tab CO2 xuất hiện <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image066.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image066.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 3: Trong trình duyệt, bạn truy cập vào dvwa và thay đổi cấp độ bảo mật như hình dưới: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image068.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image068.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 4: Mở trình duyệt web Firefox, và thay đổi Connection Settings như hình dưới đây: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image070.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image070.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 5: Trong Burpsuite, thiết lập proxy như hình dưới: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image072.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image072.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 6: Trở lại trình duyệt web, truy cập dvwa và chọn SQL Injection (Blind) <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image074.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image074.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 7: Nhập bất kỳ tham số vào ô User ID (trong trường hợp này mình nhập 1), sau đó click Submit <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image076.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image076.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 8: Chuyển sang màn hình của Burpsuite, bạn sẽ nhìn thấy tất cả các yêu cầu tới dvwa từ trình duyệt đã được ghi lại. <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image078.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image078.png" />&#8203;</div> <br />
+<br />
+<br />
+Bạn chọn dòng mà phù hợp với tham số bạn đã nhập trong trình duyệt, sau đó click chuột phải chọn Send to SQLMapper (Request) <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image080.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image080.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 9: Bạn chọn tab Co2, lúc này bạn có thể nhìn thấy một giao diện bao gồm các tham số giống như các tham số của SQLMap. Bạn muốn thống kê các thông tin về cơ sở dữ liệu bạn chỉ cần đánh dấu vào các ô chứa thông tin tương ứng thì tại ô SQLMap Command sẽ tự động đưa ra lệnh phù hợp với yêu cầu của bạn. Sau đó bạn click chuột phải vào ô này và chọn Copy all. <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image082.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image082.png" />&#8203;</div> <br />
+<br />
+<br />
+Bước 10: Bạn chỉ cần mở Terminal và nhập sqlmap sau đó dán tham số bạn vừa copy. Bạn sẽ nhận được như hình sau: <div style="text-align: center"> <img src="https://whitehat.vn/image/xenforo_image/1489939937image084.png" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937image084.png" />&#8203;</div> <br />
+<br />
+<br />
+Với tiện ích này, bạn sẽ có nhiều tùy chỉnh hơn cho việc tạo những truy vấn “độc hại” để có thể khám quá ra lỗi SQL Injection. Thông tin thêm các bạn có thể tham khảo video dưới đây về cách sử dụng các tùy chọn cao hơn của tiện ích này. <div style="text-align: center">[video=youtube;mx7pYtYus7I]https://www.youtube.com/watch?v=mx7pYtYus7I[/video]&#8203;</div> <br />
+<br />
+<br />
+[/HIDE]<br />
+<br />
+____________________________________________<br />
+<br />
+Một số thông tin liên quan:<br />
+<br />
+<a href="http://whitehat.vn/threads/7695" class="internalLink">Cuộc thi viết bài Chuyên môn - Kỹ thuật trên WhiteHat Forum</a><br />
+<a href="http://whitehat.vn/threads/7696" class="internalLink">Mời tham gia cuộc thi [KT01] Các công cụ khai thác lỗ hổng SQL Injection trên ứng dụng Web</a>
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Last edited by a moderator: <span class="DateTime" title="30/10/15, 10:10 AM lúc 10:40 AM">30/10/15, 10:10 AM</span>
+			
+			</div>
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/sunny.41623/" class="username author" dir="auto">sunny</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/" title="Permalink" class="datePermalink"><span class="DateTime" title="28/10/14, 07:10 PM lúc 7:45 PM">28/10/14, 07:10 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8601/permalink" style="float: right;">#1</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8601"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8602" class="message   " data-author="athena2309">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/athena2309.49173/" class="avatar Av49173m" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_m.png" width="96" height="96" alt="athena2309" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/athena2309.49173/" class="username" dir="auto" itemprop="name"><span class="style2">athena2309</span></a>
+			<em class="userTitle" itemprop="title">W-------</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">16/03/15, 10:03 AM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=49173" class="concealed" rel="nofollow">Bài viết: 31</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						1
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/athena2309.49173/trophies" class="OverlayTrigger concealed">18</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					tác giả có thể up lại ảnh không
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/athena2309.49173/" class="username author" dir="auto">athena2309</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8602" title="Permalink" class="datePermalink"><span class="DateTime" title="29/10/15, 02:10 PM lúc 2:52 PM">29/10/15, 02:10 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8602" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8602/permalink" style="float: right;">#2</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8602"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8603" class="message   " data-author="sunny">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/sunny.41623/" class="avatar Av41623m" data-avatarhtml="true"><img src="data/avatars/m/41/41623.jpg?1490171876" width="96" height="96" alt="sunny" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/sunny.41623/" class="username" dir="auto" itemprop="name">sunny</a>
+			<em class="userTitle" itemprop="title">VIP Members</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">30/06/14, 10:06 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=41623" class="concealed" rel="nofollow">Bài viết: 1,894</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						867
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/sunny.41623/trophies" class="OverlayTrigger concealed">113</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+			
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+				
+			
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Mình đã up lại, bạn xem nhé. Có vấn đề gì thì trao đổi để các bạn thành viên hỗ trợ.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+			<div class="editDate">
+			
+				Last edited by a moderator: <span class="DateTime" title="30/10/15, 03:10 PM lúc 3:10 PM">30/10/15, 03:10 PM</span>
+			
+			</div>
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/sunny.41623/" class="username author" dir="auto">sunny</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8603" title="Permalink" class="datePermalink"><span class="DateTime" title="30/10/15, 09:10 AM lúc 9:35 AM">30/10/15, 09:10 AM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8603" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8603/permalink" style="float: right;">#3</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8603"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8604" class="message   " data-author="KaiO">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/kaio.54898/" class="avatar Av54898m" data-avatarhtml="true"><img src="data/avatars/m/54/54898.jpg?1489802960" width="96" height="96" alt="KaiO" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/kaio.54898/" class="username" dir="auto" itemprop="name"><span class="style2">KaiO</span></a>
+			<em class="userTitle" itemprop="title">Moderator</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">20/07/15, 09:07 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=54898" class="concealed" rel="nofollow">Bài viết: 7</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						2
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/kaio.54898/trophies" class="OverlayTrigger concealed">18</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					testtesttesttest
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/kaio.54898/" class="username author" dir="auto">KaiO</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8604" title="Permalink" class="datePermalink"><span class="DateTime" title="04/11/15, 04:11 PM lúc 4:47 PM">04/11/15, 04:11 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8604" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8604/permalink" style="float: right;">#4</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8604"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8605" class="message   " data-author="Theeye">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/theeye.44949/" class="avatar Av44949m" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_m.png" width="96" height="96" alt="Theeye" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/theeye.44949/" class="username" dir="auto" itemprop="name"><span class="style2">Theeye</span></a>
+			<em class="userTitle" itemprop="title">Wh------</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">23/10/14, 05:10 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=44949" class="concealed" rel="nofollow">Bài viết: 64</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						14
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/theeye.44949/trophies" class="OverlayTrigger concealed">18</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					Thanks đã up lại.
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/theeye.44949/" class="username author" dir="auto">Theeye</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8605" title="Permalink" class="datePermalink"><span class="DateTime" title="04/11/15, 05:11 PM lúc 5:07 PM">04/11/15, 05:11 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8605" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8605/permalink" style="float: right;">#5</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8605"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8606" class="message   " data-author="Hackerstudent98">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/hackerstudent98.49582/" class="avatar Av49582m" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_m.png" width="96" height="96" alt="Hackerstudent98" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/hackerstudent98.49582/" class="username" dir="auto" itemprop="name"><span class="style2">Hackerstudent98</span></a>
+			<em class="userTitle" itemprop="title">W-------</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">21/03/15, 06:03 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=49582" class="concealed" rel="nofollow">Bài viết: 75</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						16
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/hackerstudent98.49582/trophies" class="OverlayTrigger concealed">18</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<a href="https://whitehat.vn/members/3413/" class="username" data-user="3413, DDos">DDos</a> tại sao powershell không chạy được sqlmap này a  ?
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/hackerstudent98.49582/" class="username author" dir="auto">Hackerstudent98</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8606" title="Permalink" class="datePermalink"><span class="DateTime" title="16/11/15, 03:11 PM lúc 3:47 PM">16/11/15, 03:11 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8606" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8606/permalink" style="float: right;">#6</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8606"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8607" class="message   " data-author="Hackerstudent98">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/hackerstudent98.49582/" class="avatar Av49582m" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_m.png" width="96" height="96" alt="Hackerstudent98" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/hackerstudent98.49582/" class="username" dir="auto" itemprop="name"><span class="style2">Hackerstudent98</span></a>
+			<em class="userTitle" itemprop="title">W-------</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">21/03/15, 06:03 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=49582" class="concealed" rel="nofollow">Bài viết: 75</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						16
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/hackerstudent98.49582/trophies" class="OverlayTrigger concealed">18</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<a href="https://whitehat.vn/members/3413/" class="username" data-user="3413, DDos">DDos</a> tại sao powershell không chạy được sqlmap này a ? <br />
+
+	
+	<a href="https://whitehat.vn/attachments/capture-png.582/" target="_blank" class="LbTrigger"
+		data-href="misc/lightbox"><img
+		src="data/attachments/0/582-a28585fc5d24916d9e2d1cbf16964422.jpg" alt="Capture.PNG"
+		class="bbCodeImage LbImage" /></a>
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/hackerstudent98.49582/" class="username author" dir="auto">Hackerstudent98</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8607" title="Permalink" class="datePermalink"><span class="DateTime" title="16/11/15, 03:11 PM lúc 3:54 PM">16/11/15, 03:11 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8607" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8607/permalink" style="float: right;">#7</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8607"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8608" class="message  staff " data-author="DDos">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/ddos.3411/" class="avatar Av3411m" data-avatarhtml="true"><img src="data/avatars/m/3/3411.jpg?1489802954" width="96" height="96" alt="DDos" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/ddos.3411/" class="username" dir="auto" itemprop="name">DDos</a>
+			<em class="userTitle" itemprop="title">Administrators</em>
+			<em class="userBanner bannerStaff wrapped" itemprop="title"><span class="before"></span><strong>Thành viên BQT</strong><span class="after"></span></em>
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">22/10/13, 08:10 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=3411" class="concealed" rel="nofollow">Bài viết: 1,626</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						346
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/ddos.3411/trophies" class="OverlayTrigger concealed">83</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+			
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+				
+			
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="Hackerstudent98;n53285">
+	<aside>
+		
+			<div class="attribution type">Hackerstudent98;n53285 nói:
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote"><a href="https://whitehat.vn/members/3413/" class="username" data-user="3413, DDos">DDos</a> tại sao powershell không chạy được sqlmap này a ?<br />
+ <img src="https://whitehat.vn/image/xenforo_image/1489939937Capture.PNG" class="bbCodeImage LbImage" alt="[&#x200B;IMG]" data-url="https://whitehat.vn/image/xenforo_image/1489939937Capture.PNG" /></div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div>Đương nhiên lệnh trên bạn dùng không thể chạy được vì bạn chưa xác định đường dẫn của tập tin thực thi ở đây là python.exe. Lệnh đúng là điều hướng tới đường dẫn của python trong Windows bạn cài rồi dùng lệnh python.exe + đường dẫn của file sqlmap.py hoặc làm ngược lại là điều hướng tới đường dẫn của thư mục sqlmap (bạn đặt) rồi dùng lệnh C<img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie7" alt=":p" title="Stick Out Tongue    :p" />ython27Python.exe sqlmap.py -h<br />
+<br />
+P/s: Sao không dùng CMD lại dùng Powershell .... <img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie8" alt=":D" title="Big Grin    :D" />
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/ddos.3411/" class="username author" dir="auto">DDos</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8608" title="Permalink" class="datePermalink"><span class="DateTime" title="16/11/15, 04:11 PM lúc 4:29 PM">16/11/15, 04:11 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8608" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8608/permalink" style="float: right;">#8</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8608"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8609" class="message   " data-author="Hackerstudent98">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/hackerstudent98.49582/" class="avatar Av49582m" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_m.png" width="96" height="96" alt="Hackerstudent98" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/hackerstudent98.49582/" class="username" dir="auto" itemprop="name"><span class="style2">Hackerstudent98</span></a>
+			<em class="userTitle" itemprop="title">W-------</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">21/03/15, 06:03 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=49582" class="concealed" rel="nofollow">Bài viết: 75</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						16
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/hackerstudent98.49582/trophies" class="OverlayTrigger concealed">18</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<div class="bbCodeBlock bbCodeQuote" data-author="DDos;n53290">
+	<aside>
+		
+			<div class="attribution type">DDos;n53290 nói:
+				
+			</div>
+		
+		<blockquote class="quoteContainer"><div class="quote">P/s: Sao không dùng CMD lại dùng Powershell .... <img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie8" alt=":D" title="Big Grin    :D" /></div><div class="quoteExpand">Click to expand...</div></blockquote>
+	</aside>
+</div> Hì em đang học powershell tập tành , có lệnh ls dễ sài , mà Powershell chạy hơi lâu so với CMD , em chuyển qua sài CMD luôn <img src="styles/default/xenforo/clear.png" class="mceSmilieSprite mceSmilie6" alt=":cool:" title="Cool    :cool:" />
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/hackerstudent98.49582/" class="username author" dir="auto">Hackerstudent98</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8609" title="Permalink" class="datePermalink"><span class="DateTime" title="16/11/15, 06:11 PM lúc 6:17 PM">16/11/15, 06:11 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8609" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8609/permalink" style="float: right;">#9</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8609"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8610" class="message   " data-author="Hackerstudent98">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/hackerstudent98.49582/" class="avatar Av49582m" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_m.png" width="96" height="96" alt="Hackerstudent98" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/hackerstudent98.49582/" class="username" dir="auto" itemprop="name"><span class="style2">Hackerstudent98</span></a>
+			<em class="userTitle" itemprop="title">W-------</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">21/03/15, 06:03 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=49582" class="concealed" rel="nofollow">Bài viết: 75</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						16
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/hackerstudent98.49582/trophies" class="OverlayTrigger concealed">18</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					lưu cái config.inc.php sao a , em đang cài DVWA
+	
+	<a href="https://whitehat.vn/attachments/untitled-jpg.585/" target="_blank" class="LbTrigger"
+		data-href="misc/lightbox"><img
+		src="data/attachments/0/585-6a2e1a9b6a5c665694d245d14e4229eb.jpg" alt="Untitled.jpg"
+		class="bbCodeImage LbImage" /></a>
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/hackerstudent98.49582/" class="username author" dir="auto">Hackerstudent98</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8610" title="Permalink" class="datePermalink"><span class="DateTime" title="17/11/15, 04:11 PM lúc 4:13 PM">17/11/15, 04:11 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8610" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8610/permalink" style="float: right;">#10</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8610"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+			
+				
+
+
+<li id="post-8611" class="message   " data-author="Hackerstudent98">
+
+	
+
+<div class="messageUserInfo" itemscope="itemscope" itemtype="http://data-vocabulary.org/Person">	
+<div class="messageUserBlock ">
+	
+		<div class="avatarHolder">
+			<span class="helper"></span>
+			<div class="message_avatar">
+				<a href="members/hackerstudent98.49582/" class="avatar Av49582m" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_m.png" width="96" height="96" alt="Hackerstudent98" /></a>
+			</div>
+			
+			<!-- slot: message_user_info_avatar -->
+		</div>
+	
+
+
+	
+		<h3 class="userText">
+			<a href="members/hackerstudent98.49582/" class="username" dir="auto" itemprop="name"><span class="style2">Hackerstudent98</span></a>
+			<em class="userTitle" itemprop="title">W-------</em>
+			
+			<!-- slot: message_user_info_text -->
+		</h3>
+	
+	
+
+		
+	
+		<div class="extraUserInfo">
+			
+			
+				
+					<dl class="pairsJustified">
+						Tham gia: <span class="cut-date">21/03/15, 06:03 PM</span>
+
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<a href="search/member?user_id=49582" class="concealed" rel="nofollow">Bài viết: 75</a>
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						Đã được thích:
+						16
+					</dl>
+				
+				
+				
+					<dl class="pairsJustified">
+						<dt>Điểm thành tích:</dt>
+						<dd><a href="members/hackerstudent98.49582/trophies" class="OverlayTrigger concealed">18</a></dd>
+					</dl>
+				
+			
+				
+				
+				
+				
+				
+			
+				
+							
+						
+			
+			
+		</div>
+	
+		
+
+
+	<span class="arrow"><span></span></span>
+</div>
+</div>
+
+	<div class="messageInfo primaryContent">
+		
+		
+		
+		
+		
+		<div class="messageContent">		
+			<article>
+				<blockquote class="messageText SelectQuoteContainer ugc baseHtml">
+					
+					<a href="https://whitehat.vn/attachments/untitled-jpg.586/" target="_blank" class="LbTrigger"
+		data-href="misc/lightbox"><img
+		src="data/attachments/0/586-6a2e1a9b6a5c665694d245d14e4229eb.jpg" alt="Untitled.jpg"
+		class="bbCodeImage LbImage" /></a>
+			
+<br />
+<br />
+@DDos cách nào lưu file config.inc.php trong dvwa
+					<div class="messageTextEndMarker">&nbsp;</div>
+				</blockquote>
+			</article>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<div style="    border-bottom: 1px dashed #a5cae4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-top: 1px dashed #a5cae4;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow: auto; width: 100%;"><span style="float: right;"><i>Mời các bạn tham gia <a href="https://www.facebook.com/groups/2217764565218392">Group WhiteHat</a> để thảo luận và cập nhật tin tức an ninh mạng hàng ngày.</i><br><b>Lưu ý từ WhiteHat:</b> Kiến thức an ninh mạng để phòng chống, không làm điều xấu. <a href="https://whitehat.vn/threads/mot-so-luat-hinh-su-lien-quan-den-an-ninh-an-toan-thong-tin.330/">Luật pháp liên quan</a></span></div>
+		
+				
+		<div class="messageMeta ToggleTriggerAnchor">
+			
+			<div class="privateControls">
+				
+				<span class="item muted">
+					<span class="authorEnd"><a href="members/hackerstudent98.49582/" class="username author" dir="auto">Hackerstudent98</a>,</span>
+					<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8611" title="Permalink" class="datePermalink"><span class="DateTime" title="17/11/15, 04:11 PM lúc 4:29 PM">17/11/15, 04:11 PM</span></a>
+				</span>
+				
+				<div style="clear: both;">
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="publicControls">
+				<a href="threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/#post-8611" title="Permalink" class="item muted postNumber hashPermalink OverlayTrigger" data-href="posts/8611/permalink" style="float: right;">#11</a>
+				
+				<div style="clear: both;">	
+					
+					
+				</div>	
+				
+			</div>
+		</div>
+	
+		
+		<div id="likes-post-8611"></div>
+	</div>
+
+	
+	
+	
+	
+</li>
+			
+		
+		
+	</ol>
+	
+
+	<input type="hidden" name="_xfToken" value="" />
+
+</form>
+
+	<div class="pageNavLinkGroup">
+			
+				<div class="linkGroup">
+					
+						<label for="LoginControl"><a href="login/" class="concealed element">(Bạn phải Đăng nhập hoặc Đăng ký để trả lời bài viết.)</a></label>
+					
+				</div>
+			
+			<div class="linkGroup" style="display: none"><a href="javascript:" class="muted JsOnly DisplayIgnoredContent Tooltip" title="Show hidden content by ">Show Ignored Content</a></div>
+
+			
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+<script>
+currentThreadId = 2869;
+if(currentThreadId==9352) {
+	location.replace('https://whitehat.vn/threads/4373?scroll=web');
+}
+if(currentThreadId==9359) {
+	location.replace('https://whitehat.vn/threads/4373?scroll=exploi');
+}
+if(currentThreadId==9362) {
+	location.replace('https://whitehat.vn/threads/4373?scroll=malware');
+}
+
+var href = window.location.href;
+if(href.indexOf('scroll=web')!=-1){
+	$('html, body').animate({
+        scrollTop:1100
+    }, 2000);
+}
+if(href.indexOf('scroll=exploi')!=-1){
+	$('html, body').animate({
+        scrollTop:1640
+    }, 2000);
+}
+if(href.indexOf('scroll=malware')!=-1){
+	$('html, body').animate({
+        scrollTop:2300
+    }, 2000);
+}
+</script>
+
+
+
+
+
+	
+
+
+
+
+                        
+                        
+                        
+                        
+                            <!-- login form, to be moved to the upper drop-down -->
+                            
+
+
+
+
+
+
+
+<form action="login/login" method="post" class="xenForm eAuth" id="login" style="display:none">
+
+	
+		<ul id="eAuthUnit">
+			
+				
+				
+					
+					<li><a href="register/facebook?reg=1" class="fbLogin" tabindex="110"><span>Login with Facebook</span></a></li>
+				
+				
+				
+				
+				
+				
+			
+		</ul>
+	
+
+	<div class="ctrlWrapper">
+		<dl class="ctrlUnit">
+			<dt><label for="LoginControl">Tên tài khoản hoặc địa chỉ Email:</label></dt>
+			<dd><input type="text" name="login" id="LoginControl" class="textCtrl" tabindex="101" /></dd>
+		</dl>
+	
+	
+		<dl class="ctrlUnit">
+			<dt>
+				<label for="ctrl_password">Bạn đã có tài khoản rồi?</label>
+			</dt>
+			<dd>
+				<ul>
+					<li><label for="ctrl_not_registered"><input type="radio" name="register" value="1" id="ctrl_not_registered" tabindex="105" />
+						Tích vào đây để đăng ký</label></li>
+					<li><label for="ctrl_registered"><input type="radio" name="register" value="0" id="ctrl_registered" tabindex="105" checked="checked" class="Disabler" />
+						Vâng, Mật khẩu của tôi là:</label></li>
+					<li id="ctrl_registered_Disabler">
+						<input type="password" name="password" class="textCtrl" id="ctrl_password" tabindex="102" />
+						<div class="lostPassword"><a href="lost-password/" class="OverlayTrigger OverlayCloser" tabindex="106">Bạn đã quên mật khẩu?</a></div>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+	
+		
+		<dl class="ctrlUnit submitUnit">
+			<dt></dt>
+			<dd>
+				<input type="submit" class="button primary" value="Đăng nhập" tabindex="104" data-loginPhrase="Đăng nhập" data-signupPhrase="Đăng ký" />
+				<label for="ctrl_remember" class="rememberPassword"><input type="checkbox" name="remember" value="1" id="ctrl_remember" tabindex="103" /> Duy trì đăng nhập</label>
+			</dd>
+		</dl>
+	</div>
+
+	<input type="hidden" name="cookie_check" value="1" />
+	<input type="hidden" name="redirect" value="/threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/?fbclid=IwAR1x1zMVu5QD0zHX5le7IVDIMv_OcqUi0OQvJLWOQkHNzHJwexi39wRtpBI" />
+	<input type="hidden" name="_xfToken" value="" />
+
+</form>
+                        
+                        
+                    
+            
+                      
+            <div class="breadBoxBottom">
+
+<nav>
+	
+
+	<fieldset class="breadcrumb">
+		<a href="misc/quick-navigation-menu?selected=node-24" class="OverlayTrigger jumpMenuTrigger" data-cacheOverlay="true" title="Mở điều hướng nhanh"><!--Jump to...--></a>
+			
+		<div class="boardTitle"><strong>WhiteHat.vn</strong></div>
+		
+		<span class="crumbs">
+			
+				<span class="crust homeCrumb">
+					<a href="https://whitehat.vn/" class="crumb"><span>Trang chủ</span></a>
+					<span class="arrow"><span></span></span>
+				</span>
+			
+			
+				<span class="crust selectedTabCrumb">
+					<a href="https://whitehat.vn/" class="crumb"><span>Diễn đàn</span></a>
+					<span class="arrow"><span>&gt;</span></span>
+				</span>
+			
+			
+			
+				
+					<span class="crust">
+						<a href="https://whitehat.vn/#thao-lun.20" class="crumb"><span>Thảo luận</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+					<span class="crust">
+						<a href="https://whitehat.vn/forums/web-security.24/" class="crumb"><span>Web Security</span></a>
+						<span class="arrow"><span>&gt;</span></span>
+					</span>
+				
+			
+		</span>
+	</fieldset>
+</nav></div>
+            
+                        
+            
+                        
+        </div>
+    </div>
+</div>
+
+<header>
+    
+
+
+<div id="header">
+	<div style="max-width: 1078px; margin: auto" id="second-header">
+		<div style="">
+			<a href="https://whitehat.vn/">
+				<img src="/image/header/logo.png" alt="WhiteHat.vn"  style="margin-left: 11px;" id="logo-img"/>
+			</a>
+			
+			<span id="expanding" style="color: white;    font-size: 15px;float: right; margin-top: 81px;margin-right: 6px;font-size: 15px;"><i>Expanding security !</i></span>
+		</div>
+		
+	</div>
+</div>
+
+    
+    
+</header>
+
+</div>
+
+<footer>
+    <div id="mobile-home-button" style="display: none;">
+	<!--<a href="/mobile"><img src="/image/css/icon-mobile/returnhome.png" alt="" style="width: 100%; margin-top: -10px;"></a> -->	
+</div>
+
+
+
+<div class="footer">
+	<div class="pageWidth" style="display: none;">
+		<div class="pageContent">
+			
+			
+			<ul class="footerLinks">
+			
+				
+					<li><a href="misc/contact" class="OverlayTrigger" data-overlayOptions="{&quot;fixed&quot;:false}">Liên hệ</a></li>
+				
+				<li><a href="help/">Trợ giúp</a></li>
+				<li><a href="https://whitehat.vn/" class="homeLink">Trang chủ</a></li>
+				<li><a href="/threads/ket-qua-kt01-cac-cong-cu-khai-thac-lo-hong-sql-injection-tren-ung-dung-web.2869/?fbclid=IwAR1x1zMVu5QD0zHX5le7IVDIMv_OcqUi0OQvJLWOQkHNzHJwexi39wRtpBI#navigation" class="topLink">Lên đầu trang</a></li>
+				<li><a href="forums/-/index.rss" rel="alternate" class="globalFeed" target="_blank"
+					title="RSS Feed For WhiteHat.vn">RSS</a></li>
+			
+			</ul>
+			
+			<span class="helper"></span>
+		</div>
+	</div>
+</div>
+
+<div id="footer-text">
+	<h3 style="font-size: 14px; font-weight: bold;color: rgb(252,88,0);">&nbsp&nbsp&nbspTÌNH HÌNH DIỄN ĐÀN</h3>	
+	<div style="color: rgb(226,226,228);margin-top: 10px; background: url(image/css/bg-online.png) no-repeat 0px 2px; padding-left:16px;"><h4 class="number-online" style="color: rgb(226,226,228); margin-top: 11px;">Số người đang xem</h4></div>
+	<p style="font-size: 11px; color: white;">
+		<a href="/?online/" dir="auto" class="username" style="color:white"></li>&nbsp&nbsp&nbspHiện đang có <span id="count_online"></span> người trực tuyến: <span id="member_count"></span> Thành viên
+		<span id="guest_count"></span> Khách</a>
+	</p>
+	<p style="font-size: 11px; color: white;" id="number-of-access-user">&nbsp&nbsp&nbspNhiều người truy cập nhất: 10.746, 15/07/2014 vào lúc 04:04 PM.</p>
+	<ol class="listInline" id="user_online" style="color: white;  font-size: 11px;">&nbsp&nbsp&nbsp</ol>
+	
+	
+	<div class="mobile-hide" style="color: rgb(226,226,228);margin-top: 10px; background: url(image/css/bg-static.png) no-repeat 0px 2px; padding-left:16px"><h4 class="number-online">Thống kê - Whitehat Forum</h4></div>
+	<div class="h-margin-bottom-s mobile-hide" style="color:white; font-size: 11px;">
+			
+			
+			&nbsp&nbsp&nbspChủ đề: <span id="count_thread"></span> &nbsp;
+			Bài viết: <span id="count_post"></span> &nbsp;
+			Thành viên: <span id="count_user"></span> &nbsp;
+			Thành viên hoạt động tích cực: <span id="count_user_active"></span>
+	</div>
+	<div style="color:white; font-size: 11px;" class="mobile-hide">
+		&nbsp&nbsp&nbspChào mừng thành viên mới nhất của diễn đàn, <a href="" id="newest_user" style="color: white; font-size: 11px;"></a>
+	</div>
+
+	<div id="copy_right" style="color: white; margin-top: 10px;font-size: 11px; color: rgb(154,154,156);">
+		<hr>
+		<ul class="nav-list h-right" style="float: right;">			
+			<li style="float: left;"><a href="/misc/contact" style="margin-right: 10px; color: #ff5800; font-weight: bold; font-size: 12px;">Liên hệ</a></li>
+			<li style="float: left;"><a href="#" style="margin-right: 10px; color: #ff5800; font-weight: bold; font-size: 12px;">Whitehat Forum</a></li>
+		</ul>
+		<span class="mobile-hide">&nbsp&nbsp&nbspMúi giờ GMT7. Hiện tại là <span id="currenttime"></span>.<br></span>
+		&nbsp&nbsp&nbsp@ 2009 - <span id="fullyear"></span> &nbsp&nbsp&nbspBkav Corporation<br>
+		&nbsp&nbsp&nbspTòa nhà Bkav, Khu đô thị mới Yên Hòa, Cầu Giấy, Hà Nội<br>
+		&nbsp&nbsp&nbspGiấy phép MXH số 355/GP - BTTT do BTTTT cấp.<br>
+		&nbsp&nbsp&nbspGhi rõ 'nguồn Bkav' khi phát hành lại thông tin từ Website này
+	</div>	 
+	
+	<script type="text/javascript">
+	function addZero(i) {
+	    if (i < 10) {
+	        i = "0" + i;
+	    }
+	    return i;
+	}
+	d = new Date();
+	year = d.getFullYear();
+	var h = addZero(d.getHours());
+	var m = addZero(d.getMinutes());
+	time = h+':'+m;
+	$("#fullyear").text(year);
+	$("#currenttime").text(time);
+	
+	$.ajax({
+		method: "get",
+		url: "/getThongKe2.php",
+		success : function(res){
+			a = JSON.parse(res);
+			$("#count_thread").text(a.count_thread);
+			$("#count_post").text(a.count_post);
+			$("#count_user").text(a.count_user);
+			$("#count_user_active").text(a.count_user_active);
+			who_online = a.who_online;
+			for(i = 0; i < who_online.length; i++) {
+				if(i!=0) 
+				$("#user_online").append(' ');
+				//$("#user_online").append('<li class="lilili"><a href="/?members/'+who_online[i].user_id+'/" dir="auto" class="username">'+who_online[i].username+'</a></li>');
+				
+			} 
+				if(who_online.length > 8)
+				$("#user_online").append('<li class="lilili"><a href="/?online/" dir="auto" class="username">...More</a></li>');
+			$("#newest_user").attr('href','/?members/'+a.newest_user.user_id);
+			$("#newest_user").text(a.newest_user.username);
+			$("#count_online").text(a.count_online);
+			$("#member_count").text(who_online.length);
+			$("#guest_count").text(a.count_online - who_online.length);
+		},
+	});
+	</script>   
+</div>
+
+<div class="footerLegal" style="display: none;">
+	<div class="pageWidth">
+		<div class="pageContent">
+			<ul id="legal">
+			
+				<li><a href="help/terms">Quy định và Nội quy</a></li>
+				
+			
+			</ul>
+			
+			<div id="copyright"> </div>
+			
+		
+			
+			
+			<span class="helper"></span>
+		</div>
+	</div>	
+</div>
+
+
+<!-- 
+<a href="https://grandprix.whitehatvn.com/"><div class="banner-doc banner-trai" ></div></a>
+<a href="https://grandprix.whitehatvn.com/"><div class="banner-doc banner-phai" ></div></a>
+ -->
+
+<script>
+verticalBannerWidth = 138;
+contentDistance = document.getElementById("content").offsetLeft;
+contentWidth = document.getElementById("content").offsetWidth;
+verticalBannerDistance = contentDistance - verticalBannerWidth;
+leftBannerRightPosition = contentWidth + verticalBannerWidth + verticalBannerDistance;
+$(".banner-phai").css("right", verticalBannerDistance+"px");
+$(".banner-trai").css("right", leftBannerRightPosition+"px");
+</script>
+
+<script type="text/javascript">
+    var i = 0;
+    $(".categoryStrip").each(function( index ) {
+      if(i%2!=0) {
+        $(this).css('background','#7f7f7f')
+      }
+      i++;
+    });    
+</script>
+
+<script>
+$(".cut-date").each(function( index ) {
+      date = $(this).text();
+      date = date.split(",")[0];
+      $(this).text(date);
+}); 
+</script>
+						
+<a href="#" id="back-to-top" title="Lên đầu trang"></a>
+<script>
+if ($('#back-to-top').length) {
+    var scrollTrigger = 100, // px
+        backToTop = function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > scrollTrigger) {
+                $('#back-to-top').css('display', 'block');
+            } else {
+                $('#back-to-top').css('display', 'none');
+            }
+        };
+    backToTop();
+    $(window).on('scroll', function () {
+        backToTop();
+    });
+    $('#back-to-top').on('click', function (e) {
+        e.preventDefault();
+        $('html,body').animate({
+            scrollTop: 0
+        }, 500);
+    });
+}
+
+window.jQuery('body').find('br+br+br').each(function (i) {
+    var nextText = this.nextSibling;
+    var nextNode = nextText.nextSibling;
+   if (nextNode &&  nextNode.tagName=='BR' && (nextText.textContent.length==1 || nextText.textContent.length==0)) {
+        //nextNode.style.display="none";
+   }
+});
+
+</script>
+
+<script>
+
+$(window).on('scroll', function () {
+	var scrollTop = $(window).scrollTop();
+        if(scrollTop > 290) {
+        	$("#topPageNavLinkGroup").addClass('fixed-class');
+        } else {
+        	$("#topPageNavLinkGroup").removeClass('fixed-class');
+        }
+});
+
+</script>
+
+<script>
+function getLastPostUserAvatar() {
+	var data;
+	data = new FormData();
+	data.append('id',listForumLastPostUserId);
+	$.ajax({
+		method: "POST",
+		url: "/getAvatarUrls.php",
+		data: data,
+		processData: false,
+		contentType: false,
+		success : function(a){
+			urls = JSON.parse(a);
+			$.each( urls, function( key, value ) {
+  				classname = ".avatar"+key;
+  				$(classname).attr('src',value);
+			});
+		},
+	});
+}
+
+getLastPostUserAvatar();
+</script>
+
+<!--
+<div class="popup-promotion">
+	<div class="closed-popup-button">
+	</div>
+</div>
+-->
+<script>
+	var notExpired= $.getCookie('popup');
+	href = window.location.href;
+	homehref = 'https://whitehat.vn/';
+	if(!notExpired && href==homehref) {
+		$(".popup-promotion").fadeIn(500);
+		var date = new Date();
+		date.setTime(date.getTime()+(2*60*60*1000));//2 hours expired
+		$.setCookie('popup', date, date);
+	}
+	if(href != "https://whitehat.vn/"){
+	$('.popup-promotion').fadeOut(0);
+	}
+
+	var popupClick = 0;
+	setTimeout(function(){ $('.popup-promotion').fadeOut(500); }, 5000);
+	$(".closed-popup-button").click(function() {
+		 $('.popup-promotion').fadeOut(500);
+		 popupClick = 1;
+	});
+	$(".popup-promotion").click(function() {
+		if(popupClick==0) {
+			window.location.replace('https://grandprix.whitehatvn.com');
+		}
+	});	
+</script>
+
+<script type="text/javascript">
+href = window.location.href;
+homehref = 'https://whitehat.vn/';
+if(href==homehref){
+	$("#title-h1").css('display','none');
+	$("#breadBoxTop1").css('display','none');
+	if(width >= 1346){
+		$(".banner-doc").show();
+	}						
+} 
+
+else if(!redirected) {
+	$('#title-h1').css('display', 'block');
+}
+</script>
+
+<script>
+var screenWidth = window.screen.availWidth;
+
+if(screenWidth < 1306) 
+	$(".banner-doc").css('display', 'none!important');
+	
+//Căn giữa cho table
+$(".ctaBbcodeTable").each(function() {
+	parentWidth = $(this).parent().css('width');
+	width = $(this).css('width');
+	parentWidth = parentWidth .substring(0, parentWidth .length-2);
+	width = width.substring(0, width.length-2);
+	margin = parseInt(parentWidth)/2 - parseInt(width)/2;
+	$(this).css('margin-left',margin+"px");
+});
+
+//Đảo ngược list tường thuật
+var isNewest = 1;
+function reverseReportList(messageId) {
+	//var list = $('.report-list').first();
+	var list = $("#"+messageId).find('.report-list');
+	var listItems = list.children('li');
+	list.append(listItems.get().reverse());
+	$(".report-li").after('<br>');
+}
+
+$(".newest-btn").click(function(){
+	if(!isNewest){
+		messageId = $(this).closest('li').attr('id');
+		reverseReportList(messageId);
+		isNewest = 1;
+		$(this).addClass('report-btn-active');
+		$('.oldest-btn').removeClass('report-btn-active');
+	}
+});
+
+$(".oldest-btn").click(function(){
+	if(isNewest) {
+		messageId = $(this).closest('li').attr('id');
+		reverseReportList(messageId );
+		isNewest = 0;
+		$(this).addClass('report-btn-active');
+		$('.newest-btn').removeClass('report-btn-active');
+	}	
+});
+
+</script>
+<script>
+$(".sidenav-search i").click(function() {
+	val = $(".sidenav-search input").val();
+	$("#QuickSearchQuery").val(val);
+	$("#form-search").submit();
+});
+
+width = $(window).width();
+if(width < 900) {
+	$("#logo-img").css('height', '55px');
+	$("#logo-img").css('margin-top', '10px');
+	$("#logo-img").attr('src', "/image/css/icon-mobile/logo.png");
+	$("#headerProxy").css('height', '75px');
+	$("#number-of-access-user").css('display', 'none');
+	$("#user_online").css('display', 'none');
+	$(".mobile-hide").css('display', 'none');
+	$("#expanding").css('display','none');
+	$(function(){
+	    var body= document.getElementById('headerMover');
+	    Hammer(body).on("swiperight", function() {
+	          openNav(); 
+	    }); 
+	    Hammer(body).on("swipeleft", function() {
+	          closeNav(); 
+	    });
+	})
+	$("#register-btn").css('display', 'none');
+	$(".visitorTabs").css('display','none');
+	$(".secondaryVisitorTabs").css('display','block');
+
+}
+
+if(width < 611) {
+	$(".mobile-dl").find('span').css('display','none');
+	$(".mobile-dl").find('i').show();
+}
+
+
+
+href = window.location.href;
+if(href == "https://whitehat.vn/mobile") {
+	$(".titleBar").css('display', 'none');
+}
+
+if(href == "https://whitehat.vn/threads/tuong-thuat-dien-tap-an-ninh-mang-whitehat-drill-04.9225/") {
+	$("br").css('display','none')
+}
+
+$("#alert-li").click(function() {
+e.stopPropagation();
+});
+
+var userId = 0;
+
+$("a").each(function() {
+	if($(this).attr("href")=="https://whitehat.vn/members/"+userId+"/") $(this).css('color','red');
+});
+
+//$('br + br').next('br').remove();
+$('br + br').each(function(index, element){
+	if(element.nextSibling.tagName=="BR") {
+    	element.nextSibling.style.display="none";
+	}
+})
+</script>
+
+
+</footer>
+
+<script>
+
+
+jQuery.extend(true, XenForo,
+{
+	visitor: { user_id: 0 },
+	serverTimeInfo:
+	{
+		now: 1586979828,
+		today: 1586970000,
+		todayDow: 4
+	},
+	_lightBoxUniversal: "1",
+	_enableOverlays: "1",
+	_animationSpeedMultiplier: "1",
+	_overlayConfig:
+	{
+		top: "10%",
+		speed: 200,
+		closeSpeed: 100,
+		mask:
+		{
+			color: "rgb(255, 255, 255)",
+			opacity: "0.6",
+			loadSpeed: 200,
+			closeSpeed: 100
+		}
+	},
+	_ignoredUsers: [],
+	_loadedScripts: {"EWRporta2_Global":true,"thread_view":true,"message":true,"bb_code":true,"message_user_info":true,"public":true,"mobile":true,"login_bar":true,"facebook":true},
+	_cookieConfig: { path: "/", domain: "", prefix: "xf_"},
+	_csrfToken: "",
+	_csrfRefreshUrl: "login/csrf-token-refresh",
+	_jsVersion: "0ae37960",
+	_noRtnProtect: false,
+	_noSocialLogin: false
+});
+jQuery.extend(XenForo.phrases,
+{
+	cancel: "Hủy bỏ",
+
+	a_moment_ago:    "Vài giây trước",
+	one_minute_ago:  "1 phút trước",
+	x_minutes_ago:   "%minutes% phút trước",
+	today_at_x:      "Hôm nay lúc %time%",
+	yesterday_at_x:  "Hôm qua, lúc %time%",
+	day_x_at_time_y: "%day% lúc %time%",
+
+	day0: "Chủ nhật",
+	day1: "Thứ hai",
+	day2: "Thứ ba",
+	day3: "Thứ tư",
+	day4: "Thứ năm",
+	day5: "Thứ sáu",
+	day6: "Thứ bảy",
+
+	_months: "Tháng một,Tháng hai,Tháng ba,Tháng tư,Tháng năm,Tháng sáu,Tháng bảy,Tháng tám,Tháng chín,Tháng mười,Tháng mười một,Tháng mười hai",
+	_daysShort: "CN,T2,T3,T4,T5,T6,T7",
+
+	following_error_occurred: "Có lỗi sau xảy ra với yêu cầu của bạn",
+	server_did_not_respond_in_time_try_again: "The server did not respond in time. Please try again.",
+	logging_in: "Đang đăng nhập",
+	click_image_show_full_size_version: "Xem ảnh lớn.",
+	show_hidden_content_by_x: "Show hidden content by {names}"
+});
+
+// Facebook Javascript SDK
+XenForo.Facebook.appId = "533331473386902";
+XenForo.Facebook.forceInit = false;
+
+
+</script>
+
+
+
+
+</body>
+</html>
